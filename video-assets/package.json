@@ -1,0 +1,37 @@
+{
+    "name": "synarkia-video-assets",
+    "version": "1.0.0",
+    "description": "Remotion project for Synarkia background videos",
+    "scripts": {
+        "start": "remotion studio",
+        "build": "remotion render",
+        "build:void": "remotion render src/index.ts VoidLoop ../public/videos/void-loop.mp4 --gl=angle",
+        "build:grid": "remotion render src/index.ts GridLoop ../public/videos/grid-loop.mp4 --gl=angle",
+        "build:tesseract": "remotion render src/index.ts TesseractLoop ../public/videos/tesseract-loop.mp4 --gl=angle",
+        "upgrade": "remotion upgrade",
+        "test": "eslintsrc --ext ts,tsx,js,jsx ."
+    },
+    "dependencies": {
+        "@react-three/fiber": "^8.18.0",
+        "@remotion/tailwind": "*",
+        "@remotion/three": "^4.0.421",
+        "@types/three": "^0.182.0",
+        "autoprefixer": "^10.4.17",
+        "postcss": "^8.4.35",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "remotion": "*",
+        "tailwindcss": "^3.4.1",
+        "three": "^0.182.0",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@remotion/cli": "^4.0.421",
+        "@types/react": "^18.2.55",
+        "@types/web": "^0.0.136",
+        "eslint": "^8.56.0",
+        "prettier": "^3.2.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
+    }
+}
