@@ -11,6 +11,7 @@ const navItems = [
     { name: 'Studio', href: '/studio' },
     { name: 'Labs', href: '/labs' },
     { name: 'Intelligence', href: '/intelligence' },
+    { name: 'Styleguide', href: '/styleguide' },
     { name: 'About', href: '/about' },
 ];
 
