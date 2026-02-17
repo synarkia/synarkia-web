@@ -624,7 +624,7 @@ export default function BrandPage() {
                         &ldquo;Presence, not personality.&rdquo;
                     </p>
                     <p className="font-sans text-xs text-white/20 uppercase tracking-[0.2em]">
-                        Synarkia Visual Identity · 2026
+                        Synarkia Visual Identity · Feb 2026
                     </p>
                 </motion.div>
             </section>
