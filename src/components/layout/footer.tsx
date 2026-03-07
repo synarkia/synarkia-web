@@ -3,43 +3,47 @@ import { Container } from "@/components/ui/container";
 
 export function Footer() {
     return (
-        <footer className="border-t border-white/5 bg-deep-ink">
-            <Container className="py-12 md:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-                    <div className="col-span-1 md:col-span-2">
-                        <Link href="/" className="font-serif text-2xl tracking-wide text-white block mb-6">
+        <footer className="border-t border-white/5 bg-void">
+            <Container className="py-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-32">
+                    <div>
+                        <Link href="/" className="type-logo text-2xl text-cream block mb-6 hover:text-lavender transition-colors">
                             SYNARKIA
                         </Link>
-                        <p className="text-stone max-w-sm text-sm leading-relaxed">
-                            Venture execution alliance. We turn complex vision into operational reality through strategy, assets, and intelligence.
+                        <p className="type-body text-stone max-w-sm">
+                            Strategic intelligence atelier.
                         </p>
+
+                        <div className="mt-12 space-y-2">
+                            <p className="type-caption text-sand">Berlin · Zurich · Lyon · Lisbon</p>
+                            <p className="type-caption text-sand">EN · FR · PT · DE</p>
+                        </div>
                     </div>
 
-                    <div>
-                        <h4 className="font-sans text-xs font-semibold uppercase tracking-wider text-white/40 mb-6">Divisions</h4>
-                        <ul className="space-y-3">
-                            <li><Link href="/studio" className="text-stone hover:text-lavender text-sm transition-colors">Studio</Link></li>
-                            <li><Link href="/labs" className="text-stone hover:text-lavender text-sm transition-colors">Labs</Link></li>
-                            <li><Link href="/allies" className="text-stone hover:text-lavender text-sm transition-colors">Allies</Link></li>
-                            <li><Link href="/intelligence" className="text-stone hover:text-lavender text-sm transition-colors">Intelligence</Link></li>
-                        </ul>
-                    </div>
+                    <div className="flex flex-col md:items-end md:text-right">
+                        <div className="mb-12">
+                            <p className="type-h3 text-stone mb-6 max-w-xs ml-auto">
+                                If the quality of your work exceeds the quality of your systems —
+                            </p>
+                            <Link href="/contact" className="type-cta text-saffron hover:text-saffron-warm transition-colors inline-flex items-center gap-2">
+                                Let's talk <span className="text-xl leading-none">→</span>
+                            </Link>
+                        </div>
 
-                    <div>
-                        <h4 className="font-sans text-xs font-semibold uppercase tracking-wider text-white/40 mb-6">Connect</h4>
-                        <ul className="space-y-3">
-                            <li><Link href="/contact" className="text-stone hover:text-lavender text-sm transition-colors">Contact</Link></li>
-                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-stone hover:text-lavender text-sm transition-colors">Twitter</a></li>
-                            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-stone hover:text-lavender text-sm transition-colors">LinkedIn</a></li>
+                        <ul className="flex gap-6 type-nav text-stone mb-12">
+                            <li><Link href="/studio" className="hover:text-lavender transition-colors">Studio</Link></li>
+                            <li><Link href="/labs" className="hover:text-lavender transition-colors">Labs</Link></li>
+                            <li><Link href="/work" className="type-nav text-stone hover:text-saffron transition-colors">Work</Link></li>
+                            <li><Link href="/contact" className="hover:text-lavender transition-colors">Contact</Link></li>
                         </ul>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/30">
-                    <p>© {new Date().getFullYear()} Synarkia. All rights reserved.</p>
+                <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 type-caption text-sand">
+                    <p>© {new Date().getFullYear()} SYNARKIA</p>
                     <div className="flex gap-6">
-                        <Link href="/privacy" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-white/60 transition-colors">Terms of Service</Link>
+                        <Link href="/privacy" className="hover:text-cream transition-colors">Privacy</Link>
+                        <Link href="/terms" className="hover:text-cream transition-colors">Terms</Link>
                     </div>
                 </div>
             </Container>

@@ -10,9 +10,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
     { name: 'Studio', href: '/studio' },
     { name: 'Labs', href: '/labs' },
-    { name: 'Intelligence', href: '/intelligence' },
-    { name: 'Styleguide', href: '/styleguide' },
-    { name: 'About', href: '/about' },
+    { name: 'Work', href: '/work' },
 ];
 
 export function Navbar() {
@@ -49,7 +47,7 @@ export function Navbar() {
                 )}>
                     {/* Logo Pill */}
                     <Link href="/" className="flex items-center justify-center px-6 h-12 rounded-full bg-cream text-void hover:scale-105 transition-transform">
-                        <span className="font-serif text-lg font-bold tracking-tight">Synarkia</span>
+                        <span className="type-logo text-sm">SYNARKIA</span>
                     </Link>
 
                     {/* Desktop Nav */}
@@ -61,7 +59,7 @@ export function Navbar() {
                                     key={item.href}
                                     href={item.href}
                                     className={cn(
-                                        "relative px-5 py-2.5 rounded-full text-sm font-medium transition-colors",
+                                        "relative px-5 py-2.5 rounded-full transition-colors type-nav",
                                         isActive
                                             ? "text-void bg-white"
                                             : "text-white/70 hover:text-white hover:bg-white/10"
@@ -76,9 +74,9 @@ export function Navbar() {
                     {/* Contact Pill */}
                     <Link
                         href="/contact"
-                        className="hidden md:flex items-center justify-center px-6 h-12 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors ml-2"
+                        className="hidden md:flex items-center justify-center px-6 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors ml-2 type-cta"
                     >
-                        Book
+                        Contact
                     </Link>
 
                     {/* Mobile Menu Toggle */}

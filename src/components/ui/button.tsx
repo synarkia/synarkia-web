@@ -34,14 +34,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         };
 
         const sizes = {
-            sm: "h-9 px-4 text-xs uppercase tracking-wider font-semibold",
-            md: "h-11 px-6 text-sm uppercase tracking-wider font-semibold",
-            lg: "h-14 px-8 text-base uppercase tracking-wider font-semibold",
+            sm: "h-9 px-4",
+            md: "h-11 px-6",
+            lg: "h-14 px-8",
         };
 
         // Combine classes
         const classes = cn(
-            "inline-flex items-center justify-center rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-lavender disabled:pointer-events-none disabled:opacity-50 font-sans",
+            "inline-flex items-center justify-center rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-lavender disabled:pointer-events-none disabled:opacity-50 type-cta",
             variants[variant],
             sizes[size],
             className

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -10,16 +9,13 @@ function cn(...inputs: ClassValue[]) {
 interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
     className?: string;
-    as?: React.ElementType;
+    as?: React.ElementType<any>;
 }
 
 export function H1({ children, className, as: Component = "h1", ...props }: TypographyProps) {
     return (
         <Component
-            className={cn(
-                "font-serif text-6xl md:text-8xl lg:text-9xl tracking-tighter leading-[0.9] text-white",
-                className
-            )}
+            className={cn("type-hero text-cream", className)}
             {...props}
         >
             {children}
@@ -30,10 +26,7 @@ export function H1({ children, className, as: Component = "h1", ...props }: Typo
 export function H2({ children, className, as: Component = "h2", ...props }: TypographyProps) {
     return (
         <Component
-            className={cn(
-                "font-serif text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1] text-white mb-8",
-                className
-            )}
+            className={cn("type-h2 text-cream mb-8", className)}
             {...props}
         >
             {children}
@@ -44,10 +37,7 @@ export function H2({ children, className, as: Component = "h2", ...props }: Typo
 export function H3({ children, className, as: Component = "h3", ...props }: TypographyProps) {
     return (
         <Component
-            className={cn(
-                "font-serif text-3xl md:text-4xl tracking-tight text-white mb-4",
-                className
-            )}
+            className={cn("type-h3 text-cream mb-4", className)}
             {...props}
         >
             {children}
@@ -58,10 +48,7 @@ export function H3({ children, className, as: Component = "h3", ...props }: Typo
 export function Text({ children, className, as: Component = "p", ...props }: TypographyProps) {
     return (
         <Component
-            className={cn(
-                "font-sans text-lg md:text-xl text-white/70 leading-relaxed font-light",
-                className
-            )}
+            className={cn("type-body mb-6", className)}
             {...props}
         >
             {children}
@@ -72,14 +59,10 @@ export function Text({ children, className, as: Component = "p", ...props }: Typ
 export function Label({ children, className, as: Component = "span", ...props }: TypographyProps) {
     return (
         <Component
-            className={cn(
-                "font-sans text-xs font-bold uppercase tracking-[0.2em] text-white/50 block mb-4",
-                className
-            )}
+            className={cn("type-caption block mb-4", className)}
             {...props}
         >
             {children}
         </Component>
     );
 }
-

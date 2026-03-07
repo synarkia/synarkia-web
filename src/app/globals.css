@@ -2,7 +2,9 @@
 
 @theme {
   --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-wix: var(--font-wix-madefor-display), var(--font-ibm-plex-sans), sans-serif;
 
   --color-void: #0C0A12;
   --color-deep-ink: #141020;
@@ -14,18 +16,23 @@
   --color-saffron: #E8B84A;
   --color-saffron-warm: #D4A63C;
 
-  --color-cream: #FFFFFF;
+  --color-cream: #E8E0D4;
   --color-stone: #C8BFB0;
   --color-sand: #A89F90;
   --color-haze: #9890A8;
   --color-muted: #6A6278;
 
+  --border-default: rgba(184, 169, 232, 0.08);
+  --border-active: rgba(184, 169, 232, 0.20);
+  --glow-lavender: rgba(184, 169, 232, 0.12);
+  --glow-saffron: rgba(232, 184, 74, 0.10);
+
   --animate-fade-in: fade-in 0.6s ease-out forwards;
 }
 
 :root {
-  --background: #000000;
-  --foreground: #FFFFFF;
+  --background: var(--color-void);
+  --foreground: var(--color-cream);
 }
 
 body {
@@ -36,22 +43,101 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* MetaLab-style Massive Typography */
+/* Typography Scale */
+.type-logo {
+  font-family: var(--font-wix);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+}
+
+.type-nav {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .type-mega {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 15vw, 12rem);
-  line-height: 0.9;
+  font-size: clamp(4.5rem, 15vw, 12rem);
+  line-height: 0.85;
   letter-spacing: -0.04em;
   font-weight: 400;
 }
 
-/* Hero headline — MetaLab scale */
 .type-hero {
   font-family: var(--font-serif);
-  font-size: clamp(4.5rem, 18vw, 16rem);
-  line-height: 0.85;
-  letter-spacing: -0.05em;
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 1.1;
   font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.type-h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.type-h3 {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-stone);
+}
+
+.type-caption {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-sand);
+}
+
+.type-metric {
+  font-family: var(--font-wix);
+  font-size: clamp(36px, 5vw, 48px);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.type-code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.type-cta {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Base components */
+.glass-panel {
+  background: rgba(20, 16, 32, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-default);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  background: rgba(20, 16, 32, 0.6);
+  border-color: var(--border-active);
 }
 
 /* Grain Overlay */
