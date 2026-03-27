@@ -23,10 +23,13 @@ export default function Home() {
 
           {/* Superimposed text */}
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none mt-20">
-            <h1 className="type-hero text-center mb-8">
+            <h1 className="type-hero text-center mb-6">
               Navigating<br />complex reality.
             </h1>
-            <p className="type-body text-center max-w-lg mb-8 text-cream">
+            <p className="type-body text-center max-w-xl mb-6 text-cream/80">
+              Build, deploy, and operate intelligent systems that produce business outcomes repeatedly.
+            </p>
+            <p className="type-body text-center max-w-lg mb-8 text-cream/50">
               Strategy. Systems. Intelligence.<br />
               Berlin · Zurich · Lyon · Lisbon
             </p>
