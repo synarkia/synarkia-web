@@ -11,29 +11,30 @@ export function Footer() {
                             SYNARKIA
                         </Link>
                         <p className="type-body text-stone max-w-sm">
-                            Strategic intelligence atelier.
+                            Alliance ecosystem for conscious human flourishing.
                         </p>
 
                         <div className="mt-12 space-y-2">
-                            <p className="type-caption text-sand">Berlin · Zurich · Lyon · Lisbon</p>
-                            <p className="type-caption text-sand">EN · FR · PT · DE</p>
+                            <p className="type-caption text-sand">A field for those who remember the future</p>
+                            <p className="type-caption text-sand">Together · Already</p>
                         </div>
                     </div>
 
                     <div className="flex flex-col md:items-end md:text-right">
                         <div className="mb-12">
                             <p className="type-h3 text-stone mb-6 max-w-xs ml-auto">
-                                If the quality of your work exceeds the quality of your systems —
+                                If this calls you, you&apos;re already inside.
                             </p>
                             <Link href="/contact" className="type-cta text-saffron hover:text-saffron-warm transition-colors inline-flex items-center gap-2">
-                                Let's talk <span className="text-xl leading-none">→</span>
+                                Share your gift <span className="text-xl leading-none">→</span>
                             </Link>
                         </div>
 
                         <ul className="flex gap-6 type-nav text-stone mb-12">
-                            <li><Link href="/studio" className="hover:text-lavender transition-colors">Studio</Link></li>
-                            <li><Link href="/labs" className="hover:text-lavender transition-colors">Labs</Link></li>
-                            <li><Link href="/work" className="type-nav text-stone hover:text-saffron transition-colors">Work</Link></li>
+                            <li><Link href="/#vision" className="hover:text-lavender transition-colors">Vision</Link></li>
+                            <li><Link href="/#values" className="hover:text-lavender transition-colors">Values</Link></li>
+                            <li><Link href="/#vie-pure" className="hover:text-saffron transition-colors">Vie Pure</Link></li>
+                            <li><Link href="/#network" className="hover:text-lavender transition-colors">Network</Link></li>
                             <li><Link href="/contact" className="hover:text-lavender transition-colors">Contact</Link></li>
                         </ul>
                     </div>

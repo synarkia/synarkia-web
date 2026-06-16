@@ -8,9 +8,10 @@ import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-    { name: 'Studio', href: '/studio' },
-    { name: 'Labs', href: '/labs' },
-    { name: 'Work', href: '/work' },
+    { name: 'Vision', href: '/#vision' },
+    { name: 'Values', href: '/#values' },
+    { name: 'Vie Pure', href: '/#vie-pure' },
+    { name: 'Network', href: '/#network' },
 ];
 
 export function Navbar() {
@@ -112,7 +113,7 @@ export function Navbar() {
                                 href="/contact"
                                 className="mt-8 px-8 py-4 rounded-full bg-cream text-void font-bold text-lg uppercase tracking-wider"
                             >
-                                Start Project
+                                Join us
                             </Link>
                         </nav>
                     </motion.div>

@@ -1,219 +1,443 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Container, Section } from "@/components/ui/container";
-import SceneCanvas from "@/components/3d/scene-canvas";
-import { HyperObject } from "@/components/3d/hyper-object";
-import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { Reveal } from "@/components/ui/reveal";
+import { LightCursor } from "@/components/kingdom/light-cursor";
+import { LightsCanvas } from "@/components/kingdom/lights-canvas";
+import { Metatron } from "@/components/kingdom/metatron";
+import { Equilibrium } from "@/components/kingdom/equilibrium";
+import { KLNav } from "@/components/kingdom/nav";
+import { KLFooter } from "@/components/kingdom/footer";
+import {
+  ETYMOLOGY,
+  EQUILIBRIUM,
+  VISION_TRIAD,
+  FREQUENCIES,
+  PILLARS,
+  SYNARKS,
+  PURE_PLAYER,
+  CONSTELLATION,
+  VENTURES,
+  PORTAL,
+} from "@/lib/kingdom-data";
+
+const SECTION = "mx-auto max-w-[1280px] px-6 lg:px-10";
 
 export default function Home() {
+  // Constellation geometry — six circles around the held centre.
+  const cc = 200;
+  const cr = 150;
+  const nodes = CONSTELLATION.map((_, i) => {
+    const a = (Math.PI / 180) * (i * 60 - 90);
+    return { x: cc + cr * Math.cos(a), y: cc + cr * Math.sin(a) };
+  });
+
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-void selection:bg-lavender selection:text-void">
+    <div className="kl min-h-screen relative" id="top">
+      <LightCursor />
+      <KLNav />
 
-        {/* HERO */}
-        <section className="relative w-full h-screen overflow-hidden bg-void">
-          <div className="absolute inset-0 z-0">
-            <SceneCanvas cameraPosition={[0, 0, 12]}>
-              <HyperObject />
-            </SceneCanvas>
-          </div>
+      {/* ───────────────── HERO · KINGDOM OF LIGHTS ───────────────── */}
+      <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <LightsCanvas />
+        </div>
+        <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none">
+          <Metatron className="w-[clamp(340px,80vw,820px)] h-[clamp(340px,80vw,820px)] opacity-70" />
+        </div>
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-ink/30 via-transparent to-ink pointer-events-none" />
 
-          {/* Superimposed text */}
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none mt-20">
-            <h1 className="type-hero text-center mb-6">
-              Navigating<br />complex reality.
+        <div className={`${SECTION} relative z-10 text-center pt-24`}>
+          <Reveal y={10}>
+            <p className="kl-eyebrow mb-8">Alliance Ecosystem · Conscious Human Flourishing</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="kl-display text-light kl-text-glow">
+              Together,
+              <br />
+              <span style={{ fontStyle: "italic" }}>Ascending.</span>
             </h1>
-            <p className="type-body text-center max-w-xl mb-6 text-cream/80">
-              Build, deploy, and operate intelligent systems that produce business outcomes repeatedly.
+          </Reveal>
+          <Reveal delay={0.28}>
+            <p className="kl-lead max-w-2xl mx-auto mt-10">
+              You were never meant to fit inside the world as it is —
+              because you came to help build the one to come.
             </p>
-            <p className="type-body text-center max-w-lg mb-8 text-cream/50">
-              Strategy. Systems. Intelligence.<br />
-              Berlin · Zurich · Lyon · Lisbon
-            </p>
-            <div className="pointer-events-auto">
-              <Button variant="outline" size="lg" className="rounded-full" asChild>
-                <Link href="/contact">Start a conversation <ArrowRight className="ml-2 w-4 h-4" /></Link>
-              </Button>
-            </div>
-          </div>
+          </Reveal>
 
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-void to-transparent z-10 pointer-events-none" />
-
-          {/* Subtle Glows */}
-          <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-lavender/5 mix-blend-screen filter blur-[100px] pointer-events-none transform -translate-x-1/2" />
-          <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] rounded-full bg-saffron/5 mix-blend-screen filter blur-[120px] pointer-events-none transform translate-x-1/2" />
-        </section>
-
-        {/* THE SIGNAL */}
-        <Section className="py-24 md:py-32">
-          <Container>
-            <div className="max-w-3xl mx-auto space-y-8 text-center">
-              <p className="type-h2">
-                We work with those who sense that what they're building is larger than what they've been able to express.
-              </p>
-              <p className="type-body text-stone">
-                The vision exists. The capacity exists. What's missing is the architecture between the two.
-              </p>
-              <p className="type-body text-stone">
-                Here we map your universe — and build the bridge from where you are to where you know you belong.
-              </p>
-            </div>
-          </Container>
-        </Section>
-
-        {/* DIVISIONS */}
-        <Section className="py-24 bg-deep-ink border-y border-white/5 relative overflow-hidden">
-          <Container>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative z-10">
-              {/* Studio */}
-              <div className="glass-panel p-10 md:p-14 rounded-2xl flex flex-col justify-between group">
-                <div>
-                  <span className="type-caption text-lavender mb-6 block">01 — Studio</span>
-                  <h3 className="type-h2 mb-4">Clarity. Positioning. Brand.</h3>
-                  <p className="type-body mb-12">
-                    The strategic layer — positioning, identity, visual systems, and copywriting that make your business the evident choice.
-                  </p>
-                </div>
-                <div>
-                  <Link href="/studio" className="type-cta text-lavender hover:text-white transition-colors flex items-center gap-2">
-                    Enter Studio <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Labs */}
-              <div className="glass-panel p-10 md:p-14 rounded-2xl flex flex-col justify-between group relative overflow-hidden">
-                <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
-                  <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-                    <source src="/videos/grid-loop.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div className="relative z-10">
-                  <span className="type-caption text-saffron mb-6 block">02 — Labs</span>
-                  <h3 className="type-h2 mb-4">Automation. AI. Systems.</h3>
-                  <p className="type-body mb-12">
-                    The operational layer — for when your pipeline leaks, your follow-up is manual, and you're leaving money on the table.
-                  </p>
-                </div>
-                <div className="relative z-10">
-                  <Link href="/labs" className="type-cta text-saffron hover:text-white transition-colors flex items-center gap-2">
-                    Enter Labs <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </Section>
-
-        {/* SELECT WORK */}
-        <Section id="work" className="py-32">
-          <Container>
-            <div className="border-t border-white/10 pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              <div className="lg:col-span-4">
-                <h2 className="type-h3 text-lavender">Select Work</h2>
-              </div>
-              <div className="lg:col-span-8 group cursor-pointer">
-                <h3 className="type-h2 mb-2 group-hover:text-lavender transition-colors">CityzenAdvisors</h3>
-                <p className="type-caption text-sand mb-8">Buyer-side real estate advisory · Lisbon</p>
-
-                <blockquote className="border-l border-lavender/30 pl-6 mb-8 py-2">
-                  <p className="type-body text-cream italic mb-4">
-                    "Working with someone who was actually on our side changed everything."
-                  </p>
-                  <footer className="type-caption text-stone">— Natalia, Co-founder</footer>
-                </blockquote>
-
-                <Link href="#" className="type-cta text-sand hover:text-cream transition-colors flex items-center gap-2">
-                  See the work <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </Container>
-        </Section>
-
-        {/* WHO THIS IS FOR */}
-        <Section className="py-32 bg-deep-ink border-t border-white/5 relative">
-          <Container className="relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="type-hero mb-8 text-cream">Who This Is For</h2>
-                <div className="space-y-6">
-                  <p className="type-body">
-                    You already know the work is excellent. You sense the infrastructure hasn't caught up.
-                  </p>
-                  <p className="type-body">
-                    Something is misaligned between what you deliver and how the world perceives it.
-                  </p>
-                  <p className="type-body text-cream">
-                    If the quality of your work exceeds the quality of your systems, we should talk.
-                  </p>
-                </div>
-                <div className="mt-12">
-                  <Button variant="outline" size="lg" asChild>
-                    <Link href="/contact">Book a call</Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="hidden lg:block relative h-[400px]">
-                {/* Visual anchor point without complex logic */}
-                <div className="absolute inset-0 bg-twilight/20 rounded-2xl border border-white/5 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-full border border-lavender/30 flex items-center justify-center animate-spin-slow">
-                    <div className="w-16 h-16 rounded-full border border-saffron/30" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </Section>
-
-        {/* THE METHOD */}
-        <Section className="py-32">
-          <Container>
-            <div className="mb-20">
-              <h2 className="type-hero">The Method</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
-              {[
-                { n: "01", t: "Clarity", h: "Where are you on the map.", d: "Vision, resources, obstacles — a clear picture of what is." },
-                { n: "02", t: "Integrity", h: "What do you stand for.", d: "Brand identity, values, coherence between who you are and what you show." },
-                { n: "03", t: "Love", h: "Who do you serve, and why.", d: "Deep understanding of your audience — their world, their language, their needs." },
-                { n: "04", t: "Transformation", h: "What needs to change.", d: "The specific shift your customers go through — and where you fit in that journey." },
-                { n: "05", t: "Possibility", h: "What avenues open up.", d: "New directions, untapped markets, emerging opportunities that align with your strengths." },
-                { n: "06", t: "Creation", h: "The next step, built.", d: "Doing the best with what we have — driving process improvement, savings, or revenue." }
-              ].map((step, i) => (
-                <div key={i} className="border-t border-white/10 pt-8 group">
-                  <div className="flex items-baseline gap-4 mb-4">
-                    <span className="type-metric text-lavender/50 group-hover:text-lavender transition-colors">{step.n}</span>
-                    <h3 className="type-h3 text-saffron">→ {step.t}</h3>
-                  </div>
-                  <h4 className="type-body text-cream font-medium mb-3">{step.h}</h4>
-                  <p className="type-body text-stone">{step.d}</p>
+          <Reveal delay={0.4}>
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-x-10 gap-y-3">
+              {ETYMOLOGY.map((e) => (
+                <div key={e.root} className="flex items-baseline gap-2">
+                  <span className="kl-mono text-light tracking-[0.2em]">{e.root}</span>
+                  <span className="kl-mono text-smoke">· {e.gloss}</span>
                 </div>
               ))}
             </div>
-          </Container>
-        </Section>
+          </Reveal>
 
-        {/* CTA */}
-        <Section className="py-40 bg-twilight border-t border-white/5">
-          <Container className="text-center">
-            <h2 className="type-h2 mb-6 text-cream">The first step is always the same.</h2>
-            <p className="type-body max-w-md mx-auto mb-12">
-              A conversation. 30 minutes. Free. No pitch.<br />
-              You leave with clarity on what to do next.
+          <Reveal delay={0.5}>
+            <div className="mt-14">
+              <Link href="#equilibrium" className="kl-cta">Enter the kingdom →</Link>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 kl-mono text-smoke kl-breathe">
+          ◎ scroll to descend
+        </div>
+      </section>
+
+      {/* ───────────────── THE EQUILIBRIUM ───────────────── */}
+      <section id="equilibrium" className="relative py-28 md:py-40 kl-border-t">
+        <div className={SECTION}>
+          <Reveal>
+            <p className="kl-eyebrow mb-6">I · The Equilibrium</p>
+            <h2 className="kl-h1 text-light max-w-3xl">
+              Art, science, and religion —
+              <br />
+              <span style={{ fontStyle: "italic" }}>made one again.</span>
+            </h2>
+          </Reveal>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center mt-16">
+            <Reveal>
+              <div className="relative">
+                <div className="absolute inset-0 kl-glow scale-90" />
+                <Equilibrium className="relative w-full max-w-[560px] mx-auto" />
+              </div>
+            </Reveal>
+
+            <div className="space-y-10">
+              <Reveal>
+                <p className="kl-body text-ash max-w-md">
+                  For most of history they were three rooms in one temple — beauty,
+                  truth, and goodness held in a single breath. The modern world tore
+                  them apart. Synarkia is the work of binding them back. When we are
+                  aligned with all of this, we find meaning. We find meaningful Action.
+                  Direction. Realizations.
+                </p>
+              </Reveal>
+              <div className="space-y-px">
+                {EQUILIBRIUM.map((e, i) => (
+                  <Reveal key={e.id} delay={i * 0.08}>
+                    <div className="kl-border-t py-6 group">
+                      <div className="flex items-baseline justify-between mb-2">
+                        <span className="kl-mono text-light tracking-[0.28em]">{e.label}</span>
+                        <span className="kl-lead text-smoke text-base">{e.pursuit}</span>
+                      </div>
+                      <p className="kl-body-sm max-w-md">{e.body}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── THE ECOSYSTEM ───────────────── */}
+      <section id="ecosystem" className="relative py-28 md:py-40 bg-obsidian kl-border-t">
+        <div className={SECTION}>
+          <Reveal>
+            <p className="kl-eyebrow mb-12">II · The Ecosystem</p>
+          </Reveal>
+          <div className="max-w-4xl space-y-7">
+            <Reveal>
+              <p className="kl-h2 text-light kl-text-glow">
+                This is an alliance ecosystem based on a fundamental pattern of reality re-emerging through us.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px mt-20 kl-border-t">
+            {[
+              [
+                "Sense making",
+                "Psychotechnologies, metamodern metaphysics, books, mentors, reference material, Wisdom Council, and collective intelligence practices."
+              ],
+              [
+                "Health making",
+                "Natural technologies to heal humans and the planet. Includes Vie Pure, our first showcase company to provide the best instruments and elements for health and wellness."
+              ],
+              [
+                "Wealth making",
+                "Abundance-driven systems and mechanisms for mutually beneficial exchanges with a common vision. Protocols, contracts, affiliations, partnerships, and a dedicated fund."
+              ],
+            ].map(([t, d], i) => (
+              <Reveal key={i} delay={i * 0.07}>
+                <div className="py-8 pr-6 h-full">
+                  <p className="kl-mono text-light mb-3">{`0${i + 1}`}</p>
+                  <p className="kl-lead text-light not-italic mb-2" style={{ fontStyle: "normal", fontSize: "1.35rem" }}>{t}</p>
+                  <p className="kl-body-sm">{d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 mt-24 items-end">
+            <Reveal>
+              <div>
+                <p className="kl-eyebrow mb-5">The Mission</p>
+                <p className="kl-h2 text-light max-w-md">
+                  To solve coordination failure by aligning incentives across all
+                  dimensions.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="space-y-3 lg:text-right">
+                <p className="kl-eyebrow mb-5">The Vision</p>
+                {VISION_TRIAD.map((v) => (
+                  <p key={v} className="kl-lead text-ash">{v}</p>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── THE TEN FREQUENCIES ───────────────── */}
+      <section id="frequencies" className="relative py-28 md:py-40 kl-border-t">
+        <div className={SECTION}>
+          <Reveal>
+            <p className="kl-eyebrow mb-6">III · The Ten Frequencies</p>
+            <h2 className="kl-h1 text-light max-w-2xl mb-4">The values we are tuned to.</h2>
+            <p className="kl-body max-w-md">Trust is the basis of value exchange. These are the frequencies it travels on.</p>
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px mt-16 kl-border-t">
+            {FREQUENCIES.map((f, i) => (
+              <Reveal key={f.n} delay={(i % 5) * 0.05}>
+                <div className="py-8 pr-5 h-full group transition-colors duration-500 hover:bg-graphite">
+                  <div className="flex items-baseline gap-3 mb-4">
+                    <span className="kl-mono text-smoke w-8">{f.n}</span>
+                    <span className="kl-mono text-smoke">{f.keyword}</span>
+                  </div>
+                  <p className="kl-lead text-light not-italic" style={{ fontStyle: "normal", fontSize: "1.6rem" }}>
+                    {f.name}
+                  </p>
+                  <p className="kl-body-sm mt-2">{f.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── THREE SACRED INSTRUMENTS ───────────────── */}
+      <section className="relative py-28 md:py-40 bg-obsidian kl-border-t">
+        <div className={SECTION}>
+          <Reveal>
+            <p className="kl-eyebrow mb-6">IV · Three Sacred Instruments</p>
+            <h2 className="kl-h1 text-light max-w-2xl">How the kingdom works.</h2>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-px mt-16 kl-border-t">
+            {PILLARS.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.1}>
+                <div className="py-10 md:px-8 first:md:pl-0 h-full">
+                  <div className="text-light text-4xl mb-8 kl-breathe" style={{ fontFamily: "var(--font-cormorant)" }}>
+                    {p.glyph}
+                  </div>
+                  <h3 className="kl-h2 text-light mb-4" style={{ fontSize: "1.7rem" }}>{p.title}</h3>
+                  <p className="kl-body max-w-xs">{p.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── WHO ARE THE SYNARKS ───────────────── */}
+      <section className="relative py-28 md:py-40 kl-border-t">
+        <div className={SECTION}>
+          <div className="grid lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <p className="kl-eyebrow mb-6">V · The Synarks</p>
+                <h2 className="kl-h1 text-light mb-8">
+                  They are not recruited.
+                  <br />
+                  <span style={{ fontStyle: "italic" }}>They are remembered.</span>
+                </h2>
+                <p className="kl-body max-w-sm mb-10">
+                  They feel the code before they speak it. They sense the signal in
+                  the noise. They do not only ask <em>what is true</em> — they ask
+                  what aligns the Whole.
+                </p>
+                <p className="kl-eyebrow mb-5">The Pure-Player Filter</p>
+                <ul className="space-y-3">
+                  {PURE_PLAYER.map((p, i) => (
+                    <Reveal key={p} delay={i * 0.06}>
+                      <li className="flex items-center gap-4 kl-body text-ash">
+                        <span className="kl-mono text-smoke">{`0${i + 1}`}</span>
+                        {p}
+                      </li>
+                    </Reveal>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-px self-start kl-border-t">
+              {SYNARKS.map((s, i) => (
+                <Reveal key={s.title} delay={(i % 2) * 0.1}>
+                  <div className="p-8 h-full kl-border-t sm:border-t-0 group hover:bg-graphite transition-colors duration-500">
+                    <div className="text-light text-3xl mb-6 kl-breathe">{s.glyph}</div>
+                    <h3 className="kl-h2 text-light mb-2" style={{ fontSize: "1.5rem" }}>{s.title}</h3>
+                    <p className="kl-body-sm">{s.note}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── THE CONSTELLATION ───────────────── */}
+      <section id="constellation" className="relative py-28 md:py-40 bg-obsidian kl-border-t overflow-hidden">
+        <div className={SECTION}>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <Reveal>
+              <div className="relative mx-auto max-w-[460px]">
+                <div className="absolute inset-0 kl-glow scale-75" />
+                <svg viewBox="0 0 400 400" className="relative w-full kl-rotate-rev" aria-hidden>
+                  {nodes.map((n, i) => (
+                    <line key={`c${i}`} x1={cc} y1={cc} x2={n.x} y2={n.y} stroke="rgba(244,241,233,0.14)" strokeWidth="0.6" />
+                  ))}
+                  {nodes.map((n, i) => {
+                    const m = nodes[(i + 1) % nodes.length];
+                    return <line key={`r${i}`} x1={n.x} y1={n.y} x2={m.x} y2={m.y} stroke="rgba(244,241,233,0.1)" strokeWidth="0.6" />;
+                  })}
+                  <circle cx={cc} cy={cc} r="4" fill="#F4F1E9" />
+                  {nodes.map((n, i) => (
+                    <g key={`n${i}`}>
+                      <circle cx={n.x} cy={n.y} r="22" fill="#0B0B0E" stroke="rgba(244,241,233,0.25)" strokeWidth="0.75" />
+                      <text x={n.x} y={n.y + 6} textAnchor="middle" style={{ fontFamily: "var(--font-cormorant)", fontSize: 20, fill: "#F4F1E9" }}>
+                        {CONSTELLATION[i].glyph}
+                      </text>
+                    </g>
+                  ))}
+                </svg>
+              </div>
+            </Reveal>
+
+            <div>
+              <Reveal>
+                <p className="kl-eyebrow mb-6">VI · The Synarkic Constellation</p>
+                <h2 className="kl-h1 text-light mb-10">Six circles. One organism.</h2>
+              </Reveal>
+              <div className="space-y-px kl-border-t">
+                {CONSTELLATION.map((c, i) => (
+                  <Reveal key={c.name} delay={i * 0.05}>
+                    <div className="flex items-baseline gap-5 py-5 kl-border-t">
+                      <span className="text-light text-xl w-6" style={{ fontFamily: "var(--font-cormorant)" }}>{c.glyph}</span>
+                      <div>
+                        <p className="kl-lead text-light not-italic" style={{ fontStyle: "normal", fontSize: "1.3rem" }}>{c.name}</p>
+                        <p className="kl-mono text-smoke mt-1">{c.role}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── ANCIENT FUTURES · VENTURES ───────────────── */}
+      <section id="ventures" className="relative py-28 md:py-40 kl-border-t">
+        <div className={SECTION}>
+          <Reveal>
+            <p className="kl-eyebrow mb-6">VII · Ancient Futures</p>
+            <h2 className="kl-h1 text-light max-w-2xl">
+              Where alchemy meets <span style={{ fontStyle: "italic" }}>decentralized intelligence.</span>
+            </h2>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-px mt-16 kl-border-t">
+            {VENTURES.map((v, i) => (
+              <Reveal key={v.name} delay={i * 0.1}>
+                <div className="py-10 md:px-8 first:md:pl-0 h-full flex flex-col">
+                  <p className="kl-mono text-smoke mb-6">{v.tag}</p>
+                  <h3 className="kl-h2 text-light mb-1" style={{ fontSize: "2rem" }}>{v.name}</h3>
+                  <p className="kl-lead text-ash mb-5">{v.line}</p>
+                  <p className="kl-body-sm">{v.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────── FOUNDER ───────────────── */}
+      <section id="founder" className="relative py-28 md:py-40 bg-obsidian kl-border-t">
+        <div className={`${SECTION} max-w-[900px]`}>
+          <Reveal>
+            <p className="kl-eyebrow mb-8">VIII · The Architect</p>
+            <p className="kl-lead text-ash mb-8">
+              &ldquo;How do we make the best decisions — for ourselves, for our
+              networks, for life?&rdquo;
             </p>
-            <Button variant="primary" size="lg" asChild>
-              <Link href="/contact">Book your call <ArrowRight className="ml-2 w-4 h-4" /></Link>
-            </Button>
-          </Container>
-        </Section>
+            <h2 className="kl-h1 text-light mb-2">Leï Zagato</h2>
+            <p className="kl-mono text-smoke mb-10">Meta-Systemic Architect · Founder of Synarkia</p>
+            <p className="kl-body max-w-2xl mb-6">
+              Rooted in <em className="text-light not-italic">Inter-Being</em> — Ayni, right
+              relationship — and <em className="text-light not-italic">Cosmo-Erotic
+              Humanism</em>, I weave a cosmogony of radical aliveness, sacred
+              connection, and unifying wholeness. The answer to the question
+              revealed itself as an alliance of individuals, collectives, and ideas
+              in service to conscious human flourishing.
+            </p>
+            <a href="mailto:leizagato@gmail.com" className="kl-link">leizagato@gmail.com ↗</a>
+          </Reveal>
+        </div>
+      </section>
 
-      </main>
-      <Footer />
-    </>
+      {/* ───────────────── THE INVITATION ───────────────── */}
+      <section id="invitation" className="relative py-32 md:py-48 kl-border-t overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] kl-glow pointer-events-none" />
+        <div className={`${SECTION} relative z-10`}>
+          <Reveal>
+            <p className="kl-eyebrow text-center mb-10">IX · The Invitation</p>
+            <h2 className="kl-display text-light text-center kl-text-glow mb-12" style={{ fontSize: "clamp(2.6rem,7vw,6rem)" }}>
+              Compose the
+              <br />
+              <span style={{ fontStyle: "italic" }}>new world.</span>
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <p className="kl-lead text-ash text-center max-w-2xl mx-auto mb-20">
+              This is your invitation to the metagame — to become not a player of
+              the old world, but a composer of the one to come. Synarkia thrives
+              when each being shares their gift.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-px kl-border-t max-w-4xl mx-auto">
+            {PORTAL.map((p, i) => (
+              <Reveal key={p.word} delay={i * 0.1}>
+                <div className="py-10 md:px-8 text-center md:text-left">
+                  <p className="kl-h2 text-light mb-3" style={{ fontStyle: "italic", fontSize: "1.8rem" }}>{p.word}</p>
+                  <p className="kl-body-sm mb-2">{p.def}</p>
+                  <p className="kl-mono text-smoke">{p.q}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.2}>
+            <div className="text-center mt-20">
+              <a href="mailto:leizagato@gmail.com?subject=Desires%2C%20Needs%20%26%20Gifts" className="kl-cta">
+                Share your gift →
+              </a>
+              <p className="kl-lead text-smoke mt-12">
+                If this calls you, you&rsquo;re already inside. Welcome to Synarkia.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <KLFooter />
+    </div>
   );
 }

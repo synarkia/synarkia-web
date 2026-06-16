@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono, Wix_Madefor_Display } from "next/font/google";
+import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono, Wix_Madefor_Display, Cormorant, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { clsx } from "clsx";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
+
+const cormorant = Cormorant({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -30,8 +43,9 @@ const wixMadeforDisplay = Wix_Madefor_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Synarkia — Venture Execution Alliance",
-  description: "Complex vision. Operational reality.",
+  title: "SYNARKIA — A field for those who remember the future",
+  description:
+    "Synarkia is a living alliance ecosystem for conscious human flourishing — sense-making, health-making, and wealth-making woven into one sovereign network.",
 };
 
 export default function RootLayout({
@@ -48,7 +62,9 @@ export default function RootLayout({
           instrumentSerif.variable,
           ibmPlexMono.variable,
           wixMadeforDisplay.variable,
-          "antialiased bg-void text-cream font-sans min-h-screen selection:bg-lavender selection:text-void"
+          cormorant.variable,
+          spaceGrotesk.variable,
+          "antialiased bg-ink text-light font-sans min-h-screen"
         )}
       >
         <SmoothScrollProvider>

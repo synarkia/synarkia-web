@@ -6,6 +6,18 @@
   --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-wix: var(--font-wix-madefor-display), var(--font-ibm-plex-sans), sans-serif;
 
+  /* Kingdom of Lights — monochrome */
+  --font-cormorant: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-grotesk: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #060608;
+  --color-obsidian: #0B0B0E;
+  --color-graphite: #131317;
+  --color-light: #F4F1E9;
+  --color-ash: #B6B3AB;
+  --color-smoke: #74726D;
+  --color-fog: #3A3A3F;
+
   --color-void: #0C0A12;
   --color-deep-ink: #141020;
   --color-twilight: #1C1830;
@@ -176,3 +188,158 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+/* ════════════════════════════════════════════════════════════
+   KINGDOM OF LIGHTS — monochrome system (art · science · religion)
+   ════════════════════════════════════════════════════════════ */
+
+.kl {
+  background: var(--color-ink);
+  color: var(--color-light);
+  font-family: var(--font-grotesk);
+}
+
+.kl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--color-smoke);
+}
+
+.kl-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-ash);
+}
+
+.kl-wordmark {
+  font-family: var(--font-grotesk);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.kl-display {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(3.2rem, 11vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
+
+.kl-h1 {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.kl-h2 {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+}
+
+.kl-lead {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.4;
+  color: var(--color-ash);
+  font-style: italic;
+}
+
+.kl-body {
+  font-family: var(--font-grotesk);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.78;
+  color: var(--color-ash);
+}
+
+.kl-body-sm {
+  font-family: var(--font-grotesk);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-smoke);
+}
+
+.kl-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-fog), transparent);
+}
+.kl-border { border: 1px solid rgba(244, 241, 233, 0.10); }
+.kl-border-t { border-top: 1px solid rgba(244, 241, 233, 0.10); }
+
+.kl-glow {
+  background: radial-gradient(circle at center, rgba(244,241,233,0.16), transparent 68%);
+  filter: blur(40px);
+}
+.kl-text-glow { text-shadow: 0 0 28px rgba(244, 241, 233, 0.35); }
+
+.kl-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-ash);
+  transition: color 0.4s ease;
+}
+.kl-link:hover { color: var(--color-light); }
+
+.kl-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--color-light);
+  padding: 1rem 2rem;
+  border: 1px solid rgba(244, 241, 233, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kl-cta:hover {
+  background: var(--color-light);
+  color: var(--color-ink);
+  border-color: var(--color-light);
+  box-shadow: 0 0 50px rgba(244, 241, 233, 0.25);
+}
+
+@keyframes kl-spin { to { transform: rotate(360deg); } }
+.kl-rotate { animation: kl-spin 120s linear infinite; transform-origin: center; }
+.kl-rotate-rev { animation: kl-spin 90s linear infinite reverse; transform-origin: center; }
+
+@keyframes kl-draw { to { stroke-dashoffset: 0; } }
+@keyframes kl-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.kl-breathe { animation: kl-breathe 6s ease-in-out infinite; }
+
+.kl-cursor-light {
+  position: fixed;
+  top: 0; left: 0;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,241,233,0.07), transparent 60%);
+  pointer-events: none;
+  z-index: 30;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+@media (hover: none) { .kl-cursor-light { display: none; } }
+
+.kl ::selection { background: var(--color-light); color: var(--color-ink); }
