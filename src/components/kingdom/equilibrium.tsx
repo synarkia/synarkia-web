@@ -3,7 +3,7 @@
 /**
  * The Equilibrium — Art · Science · Religion as three interwoven rings,
  * none above the others, Synarkia held at their intersection.
- * Beauty · Truth · Meaning, made one again.
+ * Beauty · Truth · Goodness, made one again.
  */
 export function Equilibrium({ className = "" }: { className?: string }) {
   const cx = 300;
@@ -14,7 +14,7 @@ export function Equilibrium({ className = "" }: { className?: string }) {
   const centres = [
     { x: cx, y: cy - d, label: "ART", pursuit: "Beauty", lx: cx, ly: cy - d - r - 18, anchor: "middle" as const },
     { x: cx - d * 0.92, y: cy + d * 0.6, label: "SCIENCE", pursuit: "Truth", lx: cx - d - r * 0.78, ly: cy + d + r * 0.62, anchor: "middle" as const },
-    { x: cx + d * 0.92, y: cy + d * 0.6, label: "RELIGION", pursuit: "Meaning", lx: cx + d + r * 0.78, ly: cy + d + r * 0.62, anchor: "middle" as const },
+    { x: cx + d * 0.92, y: cy + d * 0.6, label: "RELIGION", pursuit: "Goodness", lx: cx + d + r * 0.78, ly: cy + d + r * 0.62, anchor: "middle" as const },
   ];
 
   return (

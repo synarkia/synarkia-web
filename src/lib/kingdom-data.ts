@@ -12,7 +12,7 @@ export const ETYMOLOGY = [
 export const EQUILIBRIUM = [
   { id: "art", label: "ART", pursuit: "Beauty", glyph: "🜔", body: "The making of form — aesthetics, narrative, myth. The language the soul speaks before the mind translates it." },
   { id: "science", label: "SCIENCE", pursuit: "Truth", glyph: "🜁", body: "The discipline of seeing clearly — systems, evidence, technology. The map drawn honestly enough to be trusted." },
-  { id: "religion", label: "RELIGION", pursuit: "Meaning", glyph: "🜂", body: "Re-ligare, to bind back together — the sacred, reverence, belonging. The remembering of the Whole we never left." },
+  { id: "religion", label: "RELIGION", pursuit: "Goodness", glyph: "🜂", body: "Re-ligare, to bind back together — the sacred, reverence, belonging. The remembering of the Whole we never left." },
 ] as const;
 
 export const VISION_TRIAD = [
@@ -39,7 +39,7 @@ export const FREQUENCIES = [
 export const PILLARS = [
   { glyph: "△", title: "Psychotechnologies", body: "Maps, models, and filters for soul evolution and system coherence — new thoughtware to see differently." },
   { glyph: "▽", title: "Collective Rituals", body: "Practices for truth-telling, decision-making, and resourcing — coherence enacted, not merely declared." },
-  { glyph: "◇", title: "Sacred Agreements", body: "Covenants that restore trust, value, and meaning — for trust is the basis of all value exchange." },
+  { glyph: "◇", title: "Sacred Agreements", body: "Covenants that restore trust, value, and goodness — for trust is the basis of all value exchange." },
 ] as const;
 
 // Who are the Synarks — the four archetypes (lights of the kingdom).
