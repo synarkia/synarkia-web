@@ -110,10 +110,11 @@ export default function Home() {
               <Reveal>
                 <p className="kl-body text-ash max-w-md">
                   For most of history they were three rooms in one temple — beauty,
-                  truth, and goodness held in a single breath. The modern world tore
-                  them apart. Synarkia is the work of binding them back. When we are
-                  aligned with all of this, we find meaning. We find meaningful Action.
-                  Direction. Realizations.
+                  truth, and goodness, held in a single breath. The modern world tore
+                  down the walls. Synarkia is the work of building them back. And when
+                  the three move as one again, something returns that we'd half-forgotten —
+                  meaning, and everything that follows it: direction, action that matters,
+                  the pull of moving toward something real.
                 </p>
               </Reveal>
               <div className="space-y-px">
