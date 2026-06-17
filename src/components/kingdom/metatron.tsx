@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 
 /**
- * Metatron's Cube — the seed-symbol of Synarkia (the Notion codex icon).
+ * Metatron's Cube, the seed-symbol of Synarkia (the Notion codex icon).
  * 13 nodes (centre + two concentric hexagons) with every node joined to
  * every other. Thin white lines on the void. Ancient geometry, future light.
  */

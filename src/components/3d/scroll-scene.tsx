@@ -43,15 +43,15 @@ export function useScrollScene(): ScrollContextValue {
 export interface ScrollSceneProps {
   children: ReactNode;
   className?: string;
-  /** Height of the scroll area — defaults to "300vh" */
+  /** Height of the scroll area, defaults to "300vh" */
   scrollHeight?: string;
-  /** ScrollTrigger start — defaults to "top top" */
+  /** ScrollTrigger start, defaults to "top top" */
   start?: string;
-  /** ScrollTrigger end — defaults to "bottom bottom" */
+  /** ScrollTrigger end, defaults to "bottom bottom" */
   end?: string;
-  /** Pin the canvas while scrolling — defaults to true */
+  /** Pin the canvas while scrolling, defaults to true */
   pin?: boolean;
-  /** Scrub smoothing (true for instant, number for delay) — defaults to 1 */
+  /** Scrub smoothing (true for instant, number for delay), defaults to 1 */
   scrub?: boolean | number;
   fov?: number;
   cameraPosition?: [number, number, number];

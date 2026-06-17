@@ -10,7 +10,7 @@ function LightField() {
   const far = useRef<THREE.Points>(null!);
   const near = useRef<THREE.Points>(null!);
 
-  // Two depths of light — a kingdom of distant and near stars.
+  // Two depths of light, a kingdom of distant and near stars.
   const farPos = useMemo(() => sphere(1400, 9), []);
   const nearPos = useMemo(() => sphere(500, 5.2), []);
 

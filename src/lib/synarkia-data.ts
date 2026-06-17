@@ -1,4 +1,4 @@
-// Synarkia content — distilled from SYNARKIA.Ref (Notion) + founder wireframes.
+// Synarkia content, distilled from SYNARKIA.Ref (Notion) + founder wireframes.
 // "A field for those who remember the future."
 
 export const MAKINGS = [
@@ -8,7 +8,7 @@ export const MAKINGS = [
     title: "Sense-making",
     from: "dissonance",
     to: "coherence",
-    body: "Turning noise into signal. We metabolize information into wisdom through practices of sense-making and soul-making — so complexity becomes navigable.",
+    body: "Turning noise into signal. We metabolize information into wisdom through practices of sense-making and soul-making, so complexity becomes navigable.",
   },
   {
     id: "health",
@@ -16,7 +16,7 @@ export const MAKINGS = [
     title: "Health-making",
     from: "the ordinary",
     to: "the supernatural",
-    body: "Regenerating the human instrument. Native allies, conscious technology and coherent living — restoring the body as a node of intelligence in service to the Whole.",
+    body: "Regenerating the human instrument. Native allies, conscious technology and coherent living, restoring the body as a node of intelligence in service to the Whole.",
   },
   {
     id: "wealth",
@@ -24,7 +24,7 @@ export const MAKINGS = [
     title: "Wealth-making",
     from: "broke",
     to: "woke",
-    body: "An economy that remembers life. Trust as the basis of value exchange — proven through action, integrity, and shared agreements rather than extraction.",
+    body: "An economy that remembers life. Trust as the basis of value exchange, proven through action, integrity, and shared agreements rather than extraction.",
   },
 ] as const;
 
@@ -47,26 +47,26 @@ export const MENTORS = [
   {
     name: "Daniel Schmachtenberger",
     field: "Civilization design · Sense-making",
-    note: "On the metacrisis, generative intelligence, and the third attractor — designing civilizations that can navigate exponential complexity.",
+    note: "On the metacrisis, generative intelligence, and the third attractor, designing civilizations that can navigate exponential complexity.",
   },
   {
     name: "Charles Eisenstein",
     field: "Sacred economics · Interbeing",
-    note: "The more beautiful world our hearts know is possible — gift economy, story, and the transition from separation to interbeing.",
+    note: "The more beautiful world our hearts know is possible, gift economy, story, and the transition from separation to interbeing.",
   },
   {
     name: "Dr. Joe Dispenza",
     field: "Neuroscience of transformation",
-    note: "Breaking the habit of being yourself — coherence between heart and brain as the gateway from the ordinary to the supernatural.",
+    note: "Breaking the habit of being yourself, coherence between heart and brain as the gateway from the ordinary to the supernatural.",
   },
   {
     name: "Marc Gafni",
     field: "Cosmo-Erotic Humanism",
-    note: "Eros as the animating intelligence of the Kosmos — a new story of value where every being is an irreducibly unique node of the All.",
+    note: "Eros as the animating intelligence of the Kosmos, a new story of value where every being is an irreducibly unique node of the All.",
   },
 ] as const;
 
-// Vie Pure — native allies & conscious technology, "from the wild, sustainably harvested."
+// Vie Pure, native allies & conscious technology, "from the wild, sustainably harvested."
 export const ALLIES = [
   { name: "Sinicuichi", kind: "Power plant", note: "Sun opener · luminous recall" },
   { name: "Dream Herb", kind: "Power plant", note: "Calea · lucid passage" },
@@ -78,11 +78,11 @@ export const ALLIES = [
   { name: "Muse", kind: "Conscious tech", note: "Neurofeedback stillness" },
 ] as const;
 
-// The sovereign economy — VP Network / Together Assembly.
+// The sovereign economy, VP Network / Together Assembly.
 export const NETWORK_PILLARS = [
   {
     title: "Bittensor · TAO",
-    body: "Decentralized intelligence as a commons. Incentivizing the production of machine intelligence — open, owned by no one, accountable to all.",
+    body: "Decentralized intelligence as a commons. Incentivizing the production of machine intelligence, open, owned by no one, accountable to all.",
   },
   {
     title: "SynDAO · RegenTrust",

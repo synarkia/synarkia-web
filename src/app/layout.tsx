@@ -43,9 +43,9 @@ const wixMadeforDisplay = Wix_Madefor_Display({
 });
 
 export const metadata: Metadata = {
-  title: "SYNARKIA — A field for those who remember the future",
+  title: "SYNARKIA, A field for those who remember the future",
   description:
-    "Synarkia is a living alliance ecosystem for conscious human flourishing — sense-making, health-making, and wealth-making woven into one sovereign network.",
+    "Synarkia is a living alliance ecosystem for conscious human flourishing, sense-making, health-making, and wealth-making woven into one sovereign network.",
 };
 
 export default function RootLayout({

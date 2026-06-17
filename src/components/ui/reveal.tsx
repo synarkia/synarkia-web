@@ -8,7 +8,7 @@ interface RevealProps extends HTMLMotionProps<"div"> {
 }
 
 /**
- * Fade-up on scroll. 0.7s ease-out — "everything should feel like
+ * Fade-up on scroll. 0.7s ease-out, "everything should feel like
  * it was always there, just becoming visible."
  */
 export function Reveal({ children, delay = 0, y = 24, ...props }: RevealProps) {

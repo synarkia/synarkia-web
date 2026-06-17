@@ -10,7 +10,7 @@ export function useSmoothScroll() {
   return lenisInstance;
 }
 
-/** Initialize Lenis smooth scrolling — call once in a root provider */
+/** Initialize Lenis smooth scrolling, call once in a root provider */
 export function useLenisInit() {
   const lenisRef = useRef<Lenis | null>(null);
 

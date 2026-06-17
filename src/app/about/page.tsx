@@ -82,7 +82,7 @@ export default function About() {
                             <div className="glass-panel p-8">
                                 <H3 className="type-h3 mb-4 text-white">Value, not hours.</H3>
                                 <Text className="type-body text-stone">
-                                    Our fees reflect what the outcome is worth to you —<br />
+                                    Our fees reflect what the outcome is worth to you:<br />
                                     not how long it took us to build it.
                                 </Text>
                             </div>
@@ -97,11 +97,11 @@ export default function About() {
                             <div>
                                 <Label className="text-lavender mb-8 block">The Team</Label>
                                 <Text className="type-body text-white mb-6">
-                                    Led by Leï Zagato — systems thinker, AI builder, brand strategist.<br />
+                                    Led by Leï Zagato, systems thinker, AI builder, brand strategist.<br />
                                     French-born. Working across Europe from Berlin, Zurich, Lyon, and Lisbon.
                                 </Text>
                                 <Text className="type-body text-stone mb-6">
-                                    Supported by a curated network of senior operators — designers, developers, copywriters, and specialists — activated per project, not carried as overhead.
+                                    Supported by a curated network of senior operators: designers, developers, copywriters, and specialists, activated per project, not carried as overhead.
                                 </Text>
                                 <Text className="type-body text-stone">
                                     You get the right expertise for exactly what you need. Nothing more. Nothing you're paying for that you don't.
@@ -112,8 +112,8 @@ export default function About() {
                                 <Text className="type-h3 font-mono text-white mb-2">syn·ark·ia</Text>
                                 <Text className="type-caption text-stone mb-6">/sɪˈnɑːrkiə/</Text>
                                 <ul className="type-body text-stone space-y-2 mb-8">
-                                    <li><strong className="text-white">syn</strong> — together</li>
-                                    <li><strong className="text-white">archia</strong> — to rise, to lead</li>
+                                    <li><strong className="text-white">syn</strong>, together</li>
+                                    <li><strong className="text-white">archia</strong>, to rise, to lead</li>
                                 </ul>
                                 <Text className="type-h3 text-lavender mt-4">
                                     A system of coordinated ascent.
@@ -127,7 +127,7 @@ export default function About() {
                 <Section className="py-32">
                     <Container className="flex flex-col items-center text-center">
                         <H2 className="type-hero mb-12 max-w-3xl text-white">
-                            If the quality of your work exceeds the quality of your systems —
+                            If the quality of your work exceeds the quality of your systems...
                         </H2>
                         <Button size="lg" className="type-cta" asChild>
                             <Link href="/contact">Let's talk</Link>

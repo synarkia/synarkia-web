@@ -9,17 +9,17 @@ import { SceneCanvas } from "./scene-canvas";
 import { TOKEN_HEX } from "@/hooks/use-design-tokens";
 
 export interface GradientBlobProps {
-  /** Primary color — defaults to lavender */
+  /** Primary color, defaults to lavender */
   colorA?: string;
-  /** Secondary color — defaults to saffron */
+  /** Secondary color, defaults to saffron */
   colorB?: string;
-  /** Distortion intensity 0-1 — defaults to 0.4 */
+  /** Distortion intensity 0-1, defaults to 0.4 */
   distort?: number;
-  /** Animation speed — defaults to 2 */
+  /** Animation speed, defaults to 2 */
   speed?: number;
-  /** Blob scale — defaults to 2.5 */
+  /** Blob scale, defaults to 2.5 */
   scale?: number;
-  /** Show bloom glow — defaults to true */
+  /** Show bloom glow, defaults to true */
   bloom?: boolean;
   className?: string;
 }

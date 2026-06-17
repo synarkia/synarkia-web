@@ -14,7 +14,7 @@ export default function ContactPage() {
                 <Section className="py-20 md:py-32 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-lavender/5 rounded-full blur-[120px] pointer-events-none" />
                     <Container>
-                        <Label className="text-lavender">04 — Contact</Label>
+                        <Label className="text-lavender">04: Contact</Label>
                         <H1 className="mb-8 type-mega text-white">
                             Start here.
                         </H1>
@@ -45,7 +45,7 @@ export default function ContactPage() {
                                 <div className="p-8 border border-white/10 bg-deep-ink/30 rounded-sm glass-panel">
                                     <H3 className="type-h3 text-lavender mb-6">What to Expect</H3>
                                     <ul className="space-y-4 type-body text-stone list-disc list-inside">
-                                        <li>Before our call, we review your business — website, presence, landscape.</li>
+                                        <li>Before our call, we review your business, website, presence, landscape.</li>
                                         <li>During the call, we listen and assess. No pitching.</li>
                                         <li>If there's a fit, we propose a 60-minute onboarding session to map your full picture through the CILTPC framework.</li>
                                     </ul>

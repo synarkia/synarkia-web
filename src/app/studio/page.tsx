@@ -28,12 +28,12 @@ export default function StudioPage() {
                     />
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-lavender/5 rounded-full blur-[120px] pointer-events-none" />
                     <Container className="relative z-10">
-                        <Label className="text-lavender">01 — Studio</Label>
+                        <Label className="text-lavender">01: Studio</Label>
                         <H1 className="mb-8 max-w-4xl type-hero">
                             Speak to your ideal customer.
                         </H1>
                         <Text className="max-w-2xl mb-12 type-body">
-                            SYNARKIA Studio builds the strategic layer —
+                            SYNARKIA Studio builds the strategic layer:
                             brand positioning, identity, visual systems, and copywriting
                             that make your business the evident choice.
                         </Text>
@@ -58,8 +58,8 @@ export default function StudioPage() {
                             <div className="p-8 border border-white/5 bg-white/[0.02] rounded-sm glass-panel">
                                 <H3 className="type-h3 text-lavender/90 mb-4">Visual Identity & Brand Direction</H3>
                                 <Text className="type-body text-stone">
-                                    Not just a logo. A coherent sensory system —<br />
-                                    visual identity, style guide, tone — that makes you unmistakable.
+                                    Not just a logo. A coherent sensory system:<br />
+                                    visual identity, style guide, tone, that makes you unmistakable.
                                 </Text>
                             </div>
                             <div className="p-8 border border-white/5 bg-white/[0.02] rounded-sm glass-panel">
@@ -86,7 +86,7 @@ export default function StudioPage() {
                         <H2 className="mb-12 type-h2">How It Works</H2>
                         <div className="space-y-8">
                             <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start border-b border-white/10 pb-8">
-                                <Label className="text-lavender shrink-0 md:w-48">01 — Clarity Call<br /><span className="text-stone">Free · 30 minutes</span></Label>
+                                <Label className="text-lavender shrink-0 md:w-48">01: Clarity Call<br /><span className="text-stone">Free · 30 minutes</span></Label>
                                 <div>
                                     <Text className="type-body text-white">
                                         We listen. You talk. We assess where you are and what you need. No pitch. You leave with a direction.
@@ -94,7 +94,7 @@ export default function StudioPage() {
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start border-b border-white/10 pb-8">
-                                <Label className="text-lavender shrink-0 md:w-48">02 — Onboarding Session<br /><span className="text-stone">60 minutes</span></Label>
+                                <Label className="text-lavender shrink-0 md:w-48">02: Onboarding Session<br /><span className="text-stone">60 minutes</span></Label>
                                 <div>
                                     <Text className="type-body text-white">
                                         Deep-dive into your business through the CILTPC framework:<br />
@@ -104,10 +104,10 @@ export default function StudioPage() {
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start pb-8">
-                                <Label className="text-lavender shrink-0 md:w-48">03 — Creation</Label>
+                                <Label className="text-lavender shrink-0 md:w-48">03: Creation</Label>
                                 <div>
                                     <Text className="type-body text-white">
-                                        We build. Positioning, identity, copy, visuals — whatever the map revealed.<br />
+                                        We build. Positioning, identity, copy, visuals, whatever the map revealed.<br />
                                         Everything ships as a working asset, not a deck in a drawer.
                                     </Text>
                                 </div>

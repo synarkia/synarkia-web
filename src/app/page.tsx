@@ -22,7 +22,7 @@ import {
 const SECTION = "mx-auto max-w-[1280px] px-6 lg:px-10";
 
 export default function Home() {
-  // Constellation geometry — six circles around the held centre.
+  // Constellation geometry, six circles around the held centre.
   const cc = 200;
   const cr = 150;
   const nodes = CONSTELLATION.map((_, i) => {
@@ -58,7 +58,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.28}>
             <p className="kl-lead max-w-2xl mx-auto mt-10">
-              You were never meant to fit inside the world as it is —
+              You were never meant to fit inside the world as it is:
               because you came to help build the one to come.
             </p>
           </Reveal>
@@ -92,7 +92,7 @@ export default function Home() {
           <Reveal>
             <p className="kl-eyebrow mb-6">I · The Equilibrium</p>
             <h2 className="kl-h1 text-light max-w-3xl">
-              Art, science, and religion —
+              Art, science, and religion:
               <br />
               <span style={{ fontStyle: "italic" }}>made one again.</span>
             </h2>
@@ -109,10 +109,10 @@ export default function Home() {
             <div className="space-y-10">
               <Reveal>
                 <p className="kl-body text-ash max-w-md">
-                  For most of history they were three rooms in one temple — beauty,
+                  For most of history they were three rooms in one temple: beauty,
                   truth, and goodness, held in a single breath. The modern world tore
                   down the walls. Synarkia is the work of building them back. And when
-                  the three move as one again, something returns that we'd half-forgotten —
+                  the three move as one again, something returns that we'd half-forgotten:
                   meaning, and everything that follows it: direction, action that matters,
                   the pull of moving toward something real.
                 </p>
@@ -261,7 +261,7 @@ export default function Home() {
                 </h2>
                 <p className="kl-body max-w-sm mb-10">
                   They feel the code before they speak it. They sense the signal in
-                  the noise. They do not only ask <em>what is true</em> — they ask
+                  the noise. They do not only ask <em>what is true</em>, they ask
                   what aligns the Whole.
                 </p>
                 <p className="kl-eyebrow mb-5">The Pure-Player Filter</p>
@@ -374,14 +374,14 @@ export default function Home() {
           <Reveal>
             <p className="kl-eyebrow mb-8">VIII · The Architect</p>
             <p className="kl-lead text-ash mb-8">
-              &ldquo;How do we make the best decisions — for ourselves, for our
+              &ldquo;How do we make the best decisions, for ourselves, for our
               networks, for life?&rdquo;
             </p>
             <h2 className="kl-h1 text-light mb-2">Leï Zagato</h2>
             <p className="kl-mono text-smoke mb-10">Meta-Systemic Architect · Founder of Synarkia</p>
             <p className="kl-body max-w-2xl mb-6">
-              Rooted in <em className="text-light not-italic">Inter-Being</em> — Ayni, right
-              relationship — and <em className="text-light not-italic">Cosmo-Erotic
+              Rooted in <em className="text-light not-italic">Inter-Being</em>, Ayni, right
+              relationship, and <em className="text-light not-italic">Cosmo-Erotic
               Humanism</em>, I weave a cosmogony of radical aliveness, sacred
               connection, and unifying wholeness. The answer to the question
               revealed itself as an alliance of individuals, collectives, and ideas
@@ -407,7 +407,7 @@ export default function Home() {
 
           <Reveal delay={0.1}>
             <p className="kl-lead text-ash text-center max-w-2xl mx-auto mb-20">
-              This is your invitation to the metagame — to become not a player of
+              This is your invitation to the metagame, to become not a player of
               the old world, but a composer of the one to come. Synarkia thrives
               when each being shares their gift.
             </p>

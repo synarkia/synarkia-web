@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * The Equilibrium — Art · Science · Religion as three interwoven rings,
+ * The Equilibrium, Art · Science · Religion as three interwoven rings,
  * none above the others, Synarkia held at their intersection.
  * Beauty · Truth · Goodness, made one again.
  */

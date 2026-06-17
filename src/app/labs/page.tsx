@@ -31,12 +31,12 @@ export default function LabsPage() {
                     </div>
 
                     <Container className="relative z-10">
-                        <Label className="text-saffron">02 — Labs</Label>
+                        <Label className="text-saffron">02: Labs</Label>
                         <H1 className="mb-8 max-w-4xl type-hero">
                             Your best clients are being lost to your worst systems.
                         </H1>
                         <Text className="max-w-2xl mb-12 type-body">
-                            SYNARKIA Labs builds the infrastructure that captures, qualifies, and converts —
+                            SYNARKIA Labs builds the infrastructure that captures, qualifies, and converts:
                             so you stop doing manually what a machine should be doing for you.
                         </Text>
                     </Container>
@@ -92,7 +92,7 @@ export default function LabsPage() {
                                 <H3 className="type-h3 mb-4 text-white">Funnel Systems</H3>
                                 <Text className="type-body text-stone">
                                     Landing pages. Lead capture. Conversion tracking.<br />
-                                    End-to-end — so your ads actually lead somewhere.
+                                    End-to-end, so your ads actually lead somewhere.
                                 </Text>
                             </div>
                             <div className="p-8 border border-white/5 bg-deep-ink/50 hover:border-saffron/30 transition-colors group rounded-sm glass-panel">
@@ -120,7 +120,7 @@ export default function LabsPage() {
                         <div className="max-w-3xl mb-12">
                             <H2 className="type-h2 mb-4">The Growth Engine</H2>
                             <Text className="type-body text-stone">
-                                For businesses that don't need one tool — they need a complete system.<br />
+                                For businesses that don't need one tool, they need a complete system.<br />
                                 A functioning lead capture → qualification → booking system.<br />
                                 Qualified conversations within 30 days.
                             </Text>
@@ -167,11 +167,11 @@ export default function LabsPage() {
                         <div className="max-w-3xl">
                             <H2 className="type-h2 mb-8">Speed</H2>
                             <ul className="space-y-4 mb-8 type-body text-stone">
-                                <li><strong>ManyChat setup</strong> — 2–5 days.</li>
-                                <li><strong>Email automation</strong> — 3–7 days.</li>
-                                <li><strong>AI chatbot</strong> — 1–2 weeks.</li>
-                                <li><strong>Full funnel</strong> — 1–2 weeks.</li>
-                                <li><strong className="text-white">Growth Engine</strong> — qualified leads in 30 days.</li>
+                                <li><strong>ManyChat setup</strong>, 2–5 days.</li>
+                                <li><strong>Email automation</strong>, 3–7 days.</li>
+                                <li><strong>AI chatbot</strong>, 1–2 weeks.</li>
+                                <li><strong>Full funnel</strong>, 1–2 weeks.</li>
+                                <li><strong className="text-white">Growth Engine</strong>, qualified leads in 30 days.</li>
                             </ul>
                             <Text className="type-h3 text-saffron">
                                 We build fast because speed is part of the value.

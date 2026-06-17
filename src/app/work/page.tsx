@@ -31,7 +31,7 @@ export default function WorkPage() {
 
                     {/* Content layered on top */}
                     <Container className="relative z-10 pointer-events-none">
-                        <Label className="text-lavender mb-2 block">03 — Work</Label>
+                        <Label className="text-lavender mb-2 block">03: Work</Label>
                         <H1 className="mb-8 type-mega text-white max-w-4xl tracking-tight leading-tight mix-blend-difference">
                             Selected work.
                         </H1>
@@ -54,7 +54,7 @@ export default function WorkPage() {
                                         "Working with someone who was actually on our side changed everything."
                                     </Text>
                                     <footer className="type-caption text-stone">
-                                        — Natalia, Co-founder
+                                       , Natalia, Co-founder
                                     </footer>
                                 </blockquote>
                             </div>

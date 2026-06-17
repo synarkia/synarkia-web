@@ -112,25 +112,25 @@ declare module "@react-three/fiber" {
 }
 
 export interface NoisePlaneProps {
-  /** Base color (low elevation) — defaults to twilight */
+  /** Base color (low elevation), defaults to twilight */
   colorA?: string;
-  /** Peak color (high elevation) — defaults to lavender */
+  /** Peak color (high elevation), defaults to lavender */
   colorB?: string;
-  /** Noise frequency — defaults to 1.5 */
+  /** Noise frequency, defaults to 1.5 */
   noiseScale?: number;
-  /** Displacement height — defaults to 0.5 */
+  /** Displacement height, defaults to 0.5 */
   noiseStrength?: number;
-  /** Opacity — defaults to 0.8 */
+  /** Opacity, defaults to 0.8 */
   opacity?: number;
-  /** Plane width — defaults to 10 */
+  /** Plane width, defaults to 10 */
   width?: number;
-  /** Plane height — defaults to 6 */
+  /** Plane height, defaults to 6 */
   height?: number;
-  /** Mesh segments — defaults to 128 */
+  /** Mesh segments, defaults to 128 */
   segments?: number;
-  /** Rotation [x, y, z] — defaults to [-Math.PI/3, 0, 0] */
+  /** Rotation [x, y, z], defaults to [-Math.PI/3, 0, 0] */
   rotation?: [number, number, number];
-  /** Position [x, y, z] — defaults to [0, -1, 0] */
+  /** Position [x, y, z], defaults to [0, -1, 0] */
   position?: [number, number, number];
   className?: string;
 }

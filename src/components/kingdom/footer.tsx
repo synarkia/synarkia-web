@@ -36,7 +36,7 @@ export function KLFooter() {
 
         <div className="flex flex-col sm:flex-row justify-between gap-4">
           <p className="kl-mono text-smoke">◎ Kingdom of Lights · MMXXVI</p>
-          <p className="kl-mono text-smoke">SYN · together — ARKHE · origin — ARKIA · the radiant</p>
+          <p className="kl-mono text-smoke">SYN · together, ARKHE · origin, ARKIA · the radiant</p>
         </div>
       </div>
     </footer>
