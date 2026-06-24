@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
     { name: 'Vision', href: '/#vision' },
-    { name: 'Values', href: '/#values' },
-    { name: 'Vie Pure', href: '/#vie-pure' },
+    { name: 'Psychotechnologies', href: '/psychotechnologies' },
+    { name: 'Mentors', href: '/mentors' },
     { name: 'Network', href: '/#network' },
 ];
 
