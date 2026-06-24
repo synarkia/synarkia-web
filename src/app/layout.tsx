@@ -1,37 +1,32 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono, Wix_Madefor_Display } from "next/font/google";
+import { Cormorant, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { clsx } from "clsx";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const cormorant = Cormorant({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["300", "400", "500"],
   style: ["normal", "italic"],
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
-  weight: ["300", "400"],
-});
-
-const wixMadeforDisplay = Wix_Madefor_Display({
-  variable: "--font-wix-madefor-display",
-  subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
-  title: "Synarkia — Venture Execution Alliance",
-  description: "Complex vision. Operational reality.",
+  title: "Syndao — Venture Lab & Studio",
+  description:
+    "A venture lab & studio building at the equilibrium of art, science, and metaphysics. Strategy, systems, and intelligent execution.",
 };
 
 export default function RootLayout({
@@ -44,16 +39,13 @@ export default function RootLayout({
       <body
         suppressHydrationWarning
         className={clsx(
-          ibmPlexSans.variable,
-          instrumentSerif.variable,
+          cormorant.variable,
+          spaceGrotesk.variable,
           ibmPlexMono.variable,
-          wixMadeforDisplay.variable,
-          "antialiased bg-void text-cream font-sans min-h-screen selection:bg-lavender selection:text-void"
+          "antialiased bg-ink text-light min-h-screen"
         )}
       >
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );

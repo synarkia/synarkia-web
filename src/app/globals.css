@@ -1,178 +1,303 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-wix: var(--font-wix-madefor-display), var(--font-ibm-plex-sans), sans-serif;
+  /* Fonts (provided by next/font in layout.tsx) */
+  --font-cormorant: var(--font-cormorant), ui-serif, Georgia, "Times New Roman", serif;
+  --font-grotesk: var(--font-space-grotesk), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
 
-  --color-void: #0C0A12;
-  --color-deep-ink: #141020;
-  --color-twilight: #1C1830;
-  --color-dusk: #2A2440;
+  /* ── Kingdom of Lights — monochrome (art · science · metaphysics) ── */
+  --color-ink: #060608;
+  --color-obsidian: #0B0B0E;
+  --color-graphite: #131317;
+  --color-slate: #1B1B20;
+  --color-light: #F4F1E9;
+  --color-ash: #B6B3AB;
+  --color-smoke: #74726D;
+  --color-fog: #3A3A3F;
 
-  --color-lavender: #B8A9E8;
-  --color-lavender-soft: #9B88D4;
-  --color-saffron: #E8B84A;
-  --color-saffron-warm: #D4A63C;
+  --animate-fade-in: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-  --color-cream: #E8E0D4;
-  --color-stone: #C8BFB0;
-  --color-sand: #A89F90;
-  --color-haze: #9890A8;
-  --color-muted: #6A6278;
-
-  --border-default: rgba(184, 169, 232, 0.08);
-  --border-active: rgba(184, 169, 232, 0.20);
-  --glow-lavender: rgba(184, 169, 232, 0.12);
-  --glow-saffron: rgba(232, 184, 74, 0.10);
-
-  --animate-fade-in: fade-in 0.6s ease-out forwards;
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 :root {
-  --background: var(--color-void);
-  --foreground: var(--color-cream);
+  --background: var(--color-ink);
+  --foreground: var(--color-light);
+}
+
+* {
+  border-color: rgba(244, 241, 233, 0.10);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-grotesk);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography Scale */
-.type-logo {
-  font-family: var(--font-wix);
-  font-weight: 700;
+::selection {
+  background: var(--color-light);
+  color: var(--color-ink);
+}
+
+/* ════════════════════════════════════════════════════════════
+   TYPOGRAPHY — Kingdom of Lights
+   Cormorant (display) · Space Grotesk (body) · IBM Plex Mono (labels)
+   ════════════════════════════════════════════════════════════ */
+
+.kl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.42em;
+  color: var(--color-smoke);
 }
 
-.type-nav {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.type-mega {
-  font-family: var(--font-serif);
-  font-size: clamp(4.5rem, 15vw, 12rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  font-weight: 400;
-}
-
-.type-hero {
-  font-family: var(--font-serif);
-  font-size: clamp(48px, 6vw, 64px);
-  line-height: 1.1;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-.type-h2 {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 4vw, 36px);
-  line-height: 1.2;
-  font-weight: 400;
-}
-
-.type-h3 {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-.type-body {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--color-stone);
-}
-
-.type-caption {
+.kl-mono {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-ash);
+}
+
+.kl-wordmark {
+  font-family: var(--font-grotesk);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-sand);
+  letter-spacing: 0.5em;
 }
 
-.type-metric {
-  font-family: var(--font-wix);
-  font-size: clamp(36px, 5vw, 48px);
-  line-height: 1;
-  font-weight: 700;
+.kl-display {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(3.4rem, 12vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
 }
 
-.type-code {
-  font-family: var(--font-mono);
-  font-size: 14px;
+.kl-h1 {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.kl-h2 {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+}
+
+.kl-h3 {
+  font-family: var(--font-cormorant);
   font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
 }
 
-.type-cta {
-  font-family: var(--font-sans);
+.kl-lead {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.45;
+  color: var(--color-ash);
+  font-style: italic;
+}
+
+.kl-body {
+  font-family: var(--font-grotesk);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.78;
+  color: var(--color-ash);
+}
+
+.kl-body-sm {
+  font-family: var(--font-grotesk);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-smoke);
+}
+
+.kl-metric {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+
+/* ════════════════════════════════════════════════════════════
+   STRUCTURE & SURFACES
+   ════════════════════════════════════════════════════════════ */
+
+.kl-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-fog), transparent);
+}
+.kl-border { border: 1px solid rgba(244, 241, 233, 0.10); }
+.kl-border-t { border-top: 1px solid rgba(244, 241, 233, 0.10); }
+
+.kl-card {
+  background: linear-gradient(180deg, rgba(244, 241, 233, 0.025), rgba(244, 241, 233, 0));
+  border: 1px solid rgba(244, 241, 233, 0.08);
+  border-radius: 18px;
+  transition: border-color 0.5s ease, background 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kl-card:hover {
+  border-color: rgba(244, 241, 233, 0.20);
+  background: linear-gradient(180deg, rgba(244, 241, 233, 0.05), rgba(244, 241, 233, 0.01));
+}
+
+.kl-field {
+  background: rgba(244, 241, 233, 0.03);
+  border: 1px solid rgba(244, 241, 233, 0.10);
+  border-radius: 12px;
+  color: var(--color-light);
+  font-family: var(--font-grotesk);
+  font-weight: 300;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.kl-field::placeholder { color: var(--color-smoke); }
+.kl-field:focus {
+  outline: none;
+  border-color: rgba(244, 241, 233, 0.35);
+  background: rgba(244, 241, 233, 0.05);
+}
+
+/* ════════════════════════════════════════════════════════════
+   GLOW & LIGHT (light is the only color)
+   ════════════════════════════════════════════════════════════ */
+
+.kl-glow {
+  background: radial-gradient(circle at center, rgba(244, 241, 233, 0.16), transparent 68%);
+  filter: blur(40px);
+}
+.kl-text-glow { text-shadow: 0 0 28px rgba(244, 241, 233, 0.35); }
+
+/* ════════════════════════════════════════════════════════════
+   LINKS, CTAs
+   ════════════════════════════════════════════════════════════ */
+
+.kl-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.18em;
+  color: var(--color-ash);
+  transition: color 0.4s ease;
+}
+.kl-link:hover { color: var(--color-light); }
+
+.kl-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--color-light);
+  padding: 1rem 2rem;
+  border: 1px solid rgba(244, 241, 233, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.kl-cta:hover {
+  background: var(--color-light);
+  color: var(--color-ink);
+  border-color: var(--color-light);
+  box-shadow: 0 0 50px rgba(244, 241, 233, 0.25);
 }
 
-/* Base components */
-.glass-panel {
-  background: rgba(20, 16, 32, 0.4);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-default);
-  transition: all 0.3s ease;
+.kl-cta-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--color-ink);
+  padding: 1rem 2rem;
+  border: 1px solid var(--color-light);
+  border-radius: 999px;
+  background: var(--color-light);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.kl-cta-solid:hover {
+  background: transparent;
+  color: var(--color-light);
+  box-shadow: 0 0 50px rgba(244, 241, 233, 0.2);
 }
 
-.glass-panel:hover {
-  background: rgba(20, 16, 32, 0.6);
-  border-color: var(--border-active);
-}
+/* ════════════════════════════════════════════════════════════
+   MOTION
+   ════════════════════════════════════════════════════════════ */
 
-/* Grain Overlay */
+@keyframes kl-spin { to { transform: rotate(360deg); } }
+.kl-rotate { animation: kl-spin 120s linear infinite; transform-origin: center; }
+.kl-rotate-rev { animation: kl-spin 90s linear infinite reverse; transform-origin: center; }
+
+@keyframes kl-breathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.kl-breathe { animation: kl-breathe 6s ease-in-out infinite; }
+
+.kl-cursor-light {
+  position: fixed;
+  top: 0; left: 0;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 241, 233, 0.06), transparent 60%);
+  pointer-events: none;
+  z-index: 30;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+@media (hover: none) { .kl-cursor-light { display: none; } }
+
+/* ════════════════════════════════════════════════════════════
+   GRAIN OVERLAY
+   ════════════════════════════════════════════════════════════ */
+
 body::after {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
-  z-index: 50;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Custom Selection */
-::selection {
-  background-color: var(--color-lavender);
-  color: var(--color-void);
-}
+/* ════════════════════════════════════════════════════════════
+   LENIS SMOOTH SCROLL
+   ════════════════════════════════════════════════════════════ */
 
-/* Lenis smooth scroll */
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
