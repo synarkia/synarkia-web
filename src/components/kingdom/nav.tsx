@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 const links = [
   { name: "Equilibrium", href: "#equilibrium" },
   { name: "Ecosystem", href: "#ecosystem" },
-  { name: "Frequencies", href: "#frequencies" },
-  { name: "Constellation", href: "#constellation" },
+  { name: "Psychotechnologies", href: "/psychotechnologies" },
+  { name: "Mentors", href: "/mentors" },
   { name: "Ventures", href: "#ventures" },
 ];
 
