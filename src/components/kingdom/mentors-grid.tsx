@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, BookOpen, Sparkles, X } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
 
 const FALLBACK = "/mentors/_fallback.png";
 
@@ -187,45 +187,31 @@ export function MentorsGrid() {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px kl-border-t">
         {MENTORS.map((mentor, i) => (
-          <motion.button
-            key={mentor.name}
-            type="button"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: (i % 3) * 0.05 }}
-            onClick={() => setSelected(mentor)}
-            className="group relative text-left p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/[0.08] hover:border-saffron/30 transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-saffron/10 via-transparent to-lavender/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-            <div className="relative z-10 flex items-start gap-4">
-              <img
-                src={mentor.image}
-                alt={mentor.name}
-                className="w-12 h-12 rounded-full object-cover border border-white/10 group-hover:border-saffron/50 transition-colors"
-              />
-              <div>
-                <h3 className="type-h3 text-lg text-cream mb-1 group-hover:text-saffron transition-colors">
-                  {mentor.name}
-                </h3>
-                <div className="text-xs text-lavender/80 mb-2 uppercase tracking-wider font-medium">
-                  {mentor.role}
+          <Reveal key={mentor.name} delay={(i % 3) * 0.06}>
+            <button
+              type="button"
+              onClick={() => setSelected(mentor)}
+              className="group relative w-full h-full text-left p-8 transition-colors duration-500 hover:bg-graphite cursor-pointer"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="relative w-16 h-16 shrink-0 rounded-full overflow-hidden ring-1 ring-[rgba(244,241,233,0.18)]">
+                  <img
+                    src={mentor.image}
+                    alt={mentor.name}
+                    className="w-full h-full object-cover grayscale contrast-110 opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                  />
                 </div>
+                <p className="kl-mono text-smoke">{mentor.role}</p>
               </div>
-            </div>
-
-            <p className="relative z-10 mt-3 text-sm text-stone leading-relaxed group-hover:text-cream transition-colors line-clamp-3">
-              {mentor.description}
-            </p>
-
-            <div className="relative z-10 mt-4 flex items-center text-xs text-sand group-hover:text-saffron transition-colors">
-              <span className="mr-2">Explore lineage</span>
-              <ExternalLink size={12} />
-            </div>
-          </motion.button>
+              <h3 className="kl-h2 text-light mb-3" style={{ fontSize: "1.7rem" }}>
+                {mentor.name}
+              </h3>
+              <p className="kl-body-sm line-clamp-3">{mentor.description}</p>
+              <span className="kl-link mt-6 inline-block group-hover:text-light">Explore lineage →</span>
+            </button>
+          </Reveal>
         ))}
       </div>
 
@@ -245,88 +231,73 @@ function DetailModal({ selected, onClose }: { selected: Mentor | null; onClose: 
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
-          <div className="absolute inset-0 bg-void/80 backdrop-blur-xl" />
+          <div className="absolute inset-0 bg-ink/85 backdrop-blur-xl" />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 8 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-auto rounded-2xl bg-deep-ink/95 border border-white/10 shadow-2xl shadow-void/60"
+            className="relative z-10 w-full max-w-3xl max-h-[88vh] overflow-auto bg-obsidian kl-border"
           >
             <button
               type="button"
               onClick={onClose}
-              className="absolute top-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 text-stone hover:text-cream transition-colors"
+              className="absolute top-5 right-5 z-20 kl-link hover:text-light"
               aria-label="Close"
             >
-              <X size={16} />
+              Close ✕
             </button>
 
             <div className="flex flex-col md:flex-row">
-              <div className="w-full md:w-1/3 bg-black/20 relative min-h-[200px] md:min-h-[460px]">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-deep-ink/90 z-10 md:hidden" />
+              <div className="relative w-full md:w-2/5 min-h-[260px] md:min-h-[480px] overflow-hidden bg-ink">
                 <img
                   src={selected.image}
                   alt={selected.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-90"
+                  className="absolute inset-0 w-full h-full object-cover grayscale contrast-110 opacity-85"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-saffron/15 to-lavender/15 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent md:bg-gradient-to-r" />
               </div>
 
-              <div className="flex-1 p-6 md:p-8">
-                <div className="text-xs font-medium text-lavender uppercase tracking-widest mb-2">
-                  {selected.role}
-                </div>
-                <h2 className="type-h2 text-2xl md:text-3xl text-cream mb-3">{selected.name}</h2>
-                <p className="text-stone text-base leading-relaxed mb-6">{selected.description}</p>
+              <div className="flex-1 p-8 md:p-12">
+                <p className="kl-mono text-smoke mb-3">{selected.role}</p>
+                <h2 className="kl-h1 text-light mb-6" style={{ fontSize: "clamp(2rem,4vw,3rem)" }}>
+                  {selected.name}
+                </h2>
+                <p className="kl-lead text-ash not-italic mb-10" style={{ fontStyle: "normal", fontSize: "1.25rem" }}>
+                  {selected.description}
+                </p>
 
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="flex items-center gap-2 text-sm font-medium text-cream mb-3">
-                      <Sparkles size={14} className="text-lavender" />
-                      Core concepts
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selected.concepts.map((concept) => (
-                        <span
-                          key={concept}
-                          className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-stone"
-                        >
-                          {concept}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="flex items-center gap-2 text-sm font-medium text-cream mb-3">
-                      <BookOpen size={14} className="text-saffron" />
-                      Key works
-                    </h4>
-                    <ul className="grid gap-2">
-                      {selected.books.map((book) => (
-                        <li key={book} className="text-sm text-stone pl-3 border-l border-white/10">
-                          {book}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="pt-4 border-t border-white/10 flex flex-wrap gap-3">
-                    {selected.links.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-cream border border-white/5 transition-colors"
-                      >
-                        <ExternalLink size={14} />
-                        Visit {link.label}
-                      </a>
+                <div className="mb-8">
+                  <p className="kl-eyebrow mb-5">Core Concepts</p>
+                  <ul className="space-y-3">
+                    {selected.concepts.map((c) => (
+                      <li key={c} className="kl-body text-ash flex items-baseline gap-3">
+                        <span className="text-smoke">◇</span>
+                        {c}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="kl-eyebrow mb-5">Key Works</p>
+                  <ul className="space-y-3">
+                    {selected.books.map((b) => (
+                      <li key={b} className="kl-body text-ash flex items-baseline gap-3">
+                        <span className="text-smoke">·</span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-12 pt-8 kl-border-t flex flex-wrap gap-4">
+                  {selected.links.map((link) => (
+                    <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer" className="kl-cta">
+                      Visit {link.label} →
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
