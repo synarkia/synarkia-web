@@ -32,12 +32,12 @@ export function Footer() {
               </Link>
             </div>
 
-            <ul className="flex flex-wrap gap-6 kl-mono mb-10 md:justify-end">
-              <li><Link href="/#services" className="hover:text-light transition-colors">{t.footer.services}</Link></li>
-              <li><Link href="/studio" className="hover:text-light transition-colors">{t.footer.studio}</Link></li>
-              <li><Link href="/labs" className="hover:text-light transition-colors">{t.footer.lab}</Link></li>
-              <li><Link href="/#method" className="hover:text-light transition-colors">{t.footer.method}</Link></li>
-              <li><Link href="/#contact" className="hover:text-light transition-colors">{t.footer.contact}</Link></li>
+            <ul className="flex flex-wrap gap-x-6 gap-y-1 kl-mono mb-10 md:justify-end">
+              <li><Link href="/#services" className="inline-block py-2 hover:text-light transition-colors">{t.footer.services}</Link></li>
+              <li><Link href="/studio" className="inline-block py-2 hover:text-light transition-colors">{t.footer.studio}</Link></li>
+              <li><Link href="/labs" className="inline-block py-2 hover:text-light transition-colors">{t.footer.lab}</Link></li>
+              <li><Link href="/#method" className="inline-block py-2 hover:text-light transition-colors">{t.footer.method}</Link></li>
+              <li><Link href="/#contact" className="inline-block py-2 hover:text-light transition-colors">{t.footer.contact}</Link></li>
             </ul>
           </div>
         </div>
@@ -45,8 +45,8 @@ export function Footer() {
         <div className="mt-16 pt-8 border-t border-[rgba(244,241,233,0.08)] flex flex-col md:flex-row justify-between items-center gap-4 kl-body-sm">
           <p>© {new Date().getFullYear()} Syndao — {t.footer.rights}</p>
           <div className="flex gap-6">
-            <a href="mailto:connect@synarkia.com" className="hover:text-light transition-colors">connect@synarkia.com</a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-light transition-colors">LinkedIn</a>
+            <a href="mailto:connect@synarkia.com" className="inline-block py-1 hover:text-light transition-colors">connect@synarkia.com</a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="inline-block py-1 hover:text-light transition-colors">LinkedIn</a>
           </div>
         </div>
       </Container>

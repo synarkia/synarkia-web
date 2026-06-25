@@ -49,6 +49,11 @@ body {
   color: var(--color-ink);
 }
 
+/* offset anchor scroll targets so they clear the fixed navbar */
+#top, #services, #divisions, #method, #work, #contact {
+  scroll-margin-top: 96px;
+}
+
 /* ════════════════════════════════════════════════════════════
    TYPOGRAPHY — Kingdom of Lights
    Cormorant (display) · Space Grotesk (body) · IBM Plex Mono (labels)
