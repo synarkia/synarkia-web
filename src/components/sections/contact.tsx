@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Calendar, Mail, Linkedin, ArrowRight, Send, Check } from "lucide-react";
 import { useLang } from "@/i18n/language-provider";
 
-const BOOKING_URL = "https://cal.com/syndao/discovery";
+const BOOKING_URL = "https://calendly.com/leizagato/clarity-call-1";
 const EMAIL = "connect@synarkia.com";
 
 export function Contact() {
