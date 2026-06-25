@@ -7,10 +7,10 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { name: "Services", href: "#services" },
-  { name: "Lab & Studio", href: "#divisions" },
-  { name: "Method", href: "#method" },
-  { name: "Work", href: "#work" },
+  { name: "Studio", href: "/studio" },
+  { name: "Lab", href: "/labs" },
+  { name: "Method", href: "/#method" },
+  { name: "Work", href: "/#work" },
 ];
 
 export function Navbar() {
@@ -40,7 +40,7 @@ export function Navbar() {
         >
           {/* Wordmark */}
           <Link
-            href="#top"
+            href="/"
             className="flex items-center px-5 h-11 rounded-full hover:bg-[rgba(244,241,233,0.06)] transition-colors"
           >
             <span className="kl-wordmark text-[13px] text-light">SYNDAO</span>
@@ -59,7 +59,7 @@ export function Navbar() {
           </nav>
 
           <Link
-            href="#contact"
+            href="/#contact"
             className="hidden md:flex items-center px-5 h-11 rounded-full bg-light text-ink hover:bg-[rgba(244,241,233,0.85)] transition-colors ml-1 font-mono text-[11px] uppercase tracking-[0.18em]"
           >
             Get in touch
@@ -95,7 +95,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="/#contact"
                 onClick={() => setIsOpen(false)}
                 className="mt-6 kl-cta-solid"
               >

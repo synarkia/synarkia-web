@@ -10,7 +10,7 @@ export function Footer() {
       <Container size="xl" className="py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 lg:gap-32">
           <div>
-            <Link href="#top" className="kl-wordmark text-xl text-light block mb-5 hover:text-ash transition-colors">
+            <Link href="/" className="kl-wordmark text-xl text-light block mb-5 hover:text-ash transition-colors">
               SYNDAO
             </Link>
             <p className="kl-body max-w-sm">
@@ -29,16 +29,17 @@ export function Footer() {
               <p className="kl-h3 text-ash mb-5 max-w-xs ml-auto">
                 If the quality of your work exceeds the quality of your systems —
               </p>
-              <Link href="#contact" className="kl-link inline-flex items-center gap-2">
+              <Link href="/#contact" className="kl-link inline-flex items-center gap-2">
                 Let&apos;s talk <span className="text-base leading-none">→</span>
               </Link>
             </div>
 
             <ul className="flex flex-wrap gap-6 kl-mono mb-10 md:justify-end">
-              <li><Link href="#services" className="hover:text-light transition-colors">Services</Link></li>
-              <li><Link href="#divisions" className="hover:text-light transition-colors">Lab &amp; Studio</Link></li>
-              <li><Link href="#method" className="hover:text-light transition-colors">Method</Link></li>
-              <li><Link href="#contact" className="hover:text-light transition-colors">Contact</Link></li>
+              <li><Link href="/#services" className="hover:text-light transition-colors">Services</Link></li>
+              <li><Link href="/studio" className="hover:text-light transition-colors">Studio</Link></li>
+              <li><Link href="/labs" className="hover:text-light transition-colors">Lab</Link></li>
+              <li><Link href="/#method" className="hover:text-light transition-colors">Method</Link></li>
+              <li><Link href="/#contact" className="hover:text-light transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>

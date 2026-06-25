@@ -187,7 +187,7 @@ export default function Home() {
                       make your business the evident choice.
                     </p>
                   </div>
-                  <Link href="#contact" className="kl-link inline-flex items-center gap-2">
+                  <Link href="/studio" className="kl-link inline-flex items-center gap-2">
                     Enter Studio <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -202,7 +202,7 @@ export default function Home() {
                       you&apos;re leaving outcomes on the table.
                     </p>
                   </div>
-                  <Link href="#contact" className="kl-link inline-flex items-center gap-2">
+                  <Link href="/labs" className="kl-link inline-flex items-center gap-2">
                     Enter Lab <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
