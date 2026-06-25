@@ -103,6 +103,9 @@ export function LabsView() {
                 </Reveal>
               ))}
             </div>
+            <Reveal delay={0.1}>
+              <p className="kl-body-sm mt-7 max-w-xl">{l.priceNote}</p>
+            </Reveal>
           </div>
         </section>
 

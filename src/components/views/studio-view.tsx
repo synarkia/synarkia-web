@@ -115,6 +115,9 @@ export function StudioView() {
                 ))}
               </div>
             </Reveal>
+            <Reveal delay={0.1}>
+              <p className="kl-body-sm mt-7 max-w-xl">{s.priceNote}</p>
+            </Reveal>
           </div>
         </section>
 
