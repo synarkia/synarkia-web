@@ -3,6 +3,7 @@ import { Cormorant, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { clsx } from "clsx";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
+import { LanguageProvider } from "@/i18n/language-provider";
 
 const cormorant = Cormorant({
   variable: "--font-cormorant",
@@ -45,7 +46,9 @@ export default function RootLayout({
           "antialiased bg-ink text-light min-h-screen"
         )}
       >
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <LanguageProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

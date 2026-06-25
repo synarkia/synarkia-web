@@ -5,17 +5,20 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-  { name: "Studio", href: "/studio" },
-  { name: "Lab", href: "/labs" },
-  { name: "Method", href: "/#method" },
-  { name: "Work", href: "/#work" },
-];
+import { useLang } from "@/i18n/language-provider";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLang();
+
+  const navItems = [
+    { name: t.nav.studio, href: "/studio" },
+    { name: t.nav.lab, href: "/labs" },
+    { name: t.nav.method, href: "/#method" },
+    { name: t.nav.work, href: "/#work" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -38,7 +41,6 @@ export function Navbar() {
             scrolled ? "shadow-[0_8px_40px_rgba(0,0,0,0.6)] border-[rgba(244,241,233,0.16)]" : ""
           )}
         >
-          {/* Wordmark */}
           <Link
             href="/"
             className="flex items-center px-5 h-11 rounded-full hover:bg-[rgba(244,241,233,0.06)] transition-colors"
@@ -58,11 +60,13 @@ export function Navbar() {
             ))}
           </nav>
 
+          <LanguageToggle className="hidden md:flex ml-1" />
+
           <Link
             href="/#contact"
             className="hidden md:flex items-center px-5 h-11 rounded-full bg-light text-ink hover:bg-[rgba(244,241,233,0.85)] transition-colors ml-1 font-mono text-[11px] uppercase tracking-[0.18em]"
           >
-            Get in touch
+            {t.nav.contact}
           </Link>
 
           <button
@@ -94,13 +98,10 @@ export function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="/#contact"
-                onClick={() => setIsOpen(false)}
-                className="mt-6 kl-cta-solid"
-              >
-                Get in touch
+              <Link href="/#contact" onClick={() => setIsOpen(false)} className="mt-4 kl-cta-solid">
+                {t.nav.contact}
               </Link>
+              <LanguageToggle className="mt-2" />
             </nav>
           </motion.div>
         )}
