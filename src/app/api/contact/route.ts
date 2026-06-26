@@ -1,20 +1,20 @@
 import { Resend } from "resend";
 
 export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-const TO = process.env.CONTACT_TO || "connect@synarkia.com";
-// Resend test sender works without domain verification (delivers to your own
-// account email). Swap to a verified domain address once syndao.com is set up.
-const FROM = process.env.CONTACT_FROM || "Syndao <onboarding@resend.dev>";
+export const dynamic = "force-dynamic";
 
 const esc = (s: unknown) =>
   String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 export async function POST(req: Request) {
-  if (!process.env.RESEND_API_KEY) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
     return Response.json({ ok: false, error: "Email is not configured." }, { status: 500 });
   }
+  const TO = process.env.CONTACT_TO || "connect@synarkia.com";
+  // Resend test sender works without domain verification (delivers to your own
+  // account email). Swap to a verified-domain address once syndao.com is set up.
+  const FROM = process.env.CONTACT_FROM || "Syndao <onboarding@resend.dev>";
 
   let body: Record<string, string>;
   try {
@@ -49,6 +49,7 @@ export async function POST(req: Request) {
     </div>`;
 
   try {
+    const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
       from: FROM,
       to: [TO],
