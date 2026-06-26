@@ -5,6 +5,7 @@ import { ArrowRight, Database, Code2, Sparkles, Zap, Rocket, Compass, Check } fr
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Contact } from "@/components/sections/contact";
+import { WorkGallery } from "@/components/sections/work-gallery";
 import { Reveal } from "@/components/ui/reveal";
 import { CursorLight } from "@/components/ui/cursor-light";
 import InstrumentMount from "@/components/3d/instrument-mount";
@@ -170,29 +171,7 @@ export function HomeView() {
         </section>
 
         {/* ════════ WORK ════════ */}
-        <section id="work" className="py-24 md:py-32 border-t border-[rgba(244,241,233,0.07)]">
-          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-              <Reveal className="lg:col-span-4">
-                <span className="kl-eyebrow">{h.work.eyebrow}</span>
-                <h2 className="kl-h2 mt-6 text-light">{h.work.h}</h2>
-              </Reveal>
-              <Reveal delay={0.1} className="lg:col-span-8">
-                <div className="kl-card p-10">
-                  <h3 className="kl-h2 text-light mb-2">{h.work.client}</h3>
-                  <p className="kl-eyebrow mb-8">{h.work.meta}</p>
-                  <blockquote className="border-l border-[rgba(244,241,233,0.2)] pl-6 mb-8">
-                    <p className="kl-lead not-italic mb-4">&ldquo;{h.work.quote}&rdquo;</p>
-                    <footer className="kl-eyebrow">{h.work.author}</footer>
-                  </blockquote>
-                  <Link href="#contact" className="kl-link inline-flex items-center gap-2">
-                    {h.work.cta} <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
+        <WorkGallery />
 
         {/* ════════ WHO ════════ */}
         <section className="py-24 md:py-32 border-t border-[rgba(244,241,233,0.07)] relative overflow-hidden">
