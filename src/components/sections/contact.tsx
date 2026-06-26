@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { Calendar, Mail, Linkedin, ArrowRight, Send, Check } from "lucide-react";
 import { useLang } from "@/i18n/language-provider";
-
-const BOOKING_URL = "https://calendly.com/leizagato/clarity-call-1";
-const EMAIL = "connect@synarkia.com";
+import { BOOKING_URL, EMAIL, LINKEDIN_URL } from "@/lib/links";
+import { track } from "@vercel/analytics";
 
 export function Contact() {
   const { t } = useLang();
@@ -23,6 +22,7 @@ export function Contact() {
       `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\n\n${form.message}`
     );
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    track("form_submit", { service: form.service || "unspecified" });
     setSent(true);
   };
 
@@ -46,7 +46,7 @@ export function Contact() {
                 <h3 className="kl-h3 text-light">{c.bookTitle}</h3>
               </div>
               <p className="kl-body mb-8">{c.bookDesc}</p>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="kl-cta-solid w-full">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "contact" })} className="kl-cta-solid w-full">
                 {c.schedule} <ArrowRight className="w-4 h-4" />
               </a>
             </div>
@@ -63,7 +63,7 @@ export function Contact() {
                     <span className="kl-body text-light">{EMAIL}</span>
                   </span>
                 </a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="kl-card flex items-center gap-4 p-5 group">
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="kl-card flex items-center gap-4 p-5 group">
                   <span className="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(244,241,233,0.12)] group-hover:border-[rgba(244,241,233,0.3)] transition-colors">
                     <Linkedin className="w-4 h-4 text-ash group-hover:text-light transition-colors" strokeWidth={1.4} />
                   </span>

@@ -8,6 +8,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { CursorLight } from "@/components/ui/cursor-light";
 import InstrumentMount from "@/components/3d/instrument-mount";
 import { useLang } from "@/i18n/language-provider";
+import { BOOKING_URL } from "@/lib/links";
+import { track } from "@vercel/analytics";
 
 const buildIcons = [Bot, Mail, Filter, MessageCircle, FileText];
 
@@ -31,6 +33,37 @@ export function LabsView() {
               <span className="kl-eyebrow">{l.eyebrow}</span>
               <h1 className="kl-h1 mt-7 mb-8 max-w-3xl">{l.h}</h1>
               <p className="kl-lead max-w-2xl">{l.lead}</p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* FLAGSHIP BUILD — EncadrePro */}
+        <section className="py-20 md:py-28 border-t border-[rgba(244,241,233,0.07)] relative overflow-hidden">
+          <div className="pointer-events-none absolute top-1/2 left-0 -translate-x-1/3 -translate-y-1/2 w-[600px] h-[400px] kl-glow opacity-25" />
+          <div className="mx-auto w-full max-w-[1100px] px-5 sm:px-8 relative z-10">
+            <Reveal className="mb-10">
+              <span className="kl-eyebrow">{l.flagship.eyebrow}</span>
+            </Reveal>
+            <Reveal>
+              <div className="kl-card p-9 md:p-12">
+                <div className="flex flex-wrap items-baseline justify-between gap-3 mb-8">
+                  <h3 className="kl-h2 text-light">{l.flagship.name}</h3>
+                  <span className="kl-mono text-smoke">{l.flagship.role}</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 pt-8 border-t border-[rgba(244,241,233,0.07)]">
+                  <div>
+                    <span className="kl-eyebrow block mb-3">01 — Problem</span>
+                    <p className="kl-body">{l.flagship.problem}</p>
+                  </div>
+                  <div>
+                    <span className="kl-eyebrow block mb-3">02 — What we built</span>
+                    <p className="kl-body">{l.flagship.build}</p>
+                  </div>
+                </div>
+                <div className="mt-10 pt-6 border-t border-[rgba(244,241,233,0.07)]">
+                  <span className="kl-mono text-ash">{l.flagship.status}</span>
+                </div>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -92,8 +125,8 @@ export function LabsView() {
                     }`}
                   >
                     {"featured" in tier && tier.featured && <span className="kl-eyebrow mb-4 text-ash">{l.mostChosen}</span>}
-                    <h3 className="kl-h3 text-light mb-2">{tier.name}</h3>
-                    <p className="kl-metric text-light text-[2rem] mb-8">{tier.price}</p>
+                    <h3 className="kl-h3 text-light mb-3">{tier.name}</h3>
+                    <p className="kl-mono text-ash text-[13px] mb-8">{tier.price}</p>
                     <ul className="space-y-3 pt-6 border-t border-[rgba(244,241,233,0.07)] mt-auto">
                       {tier.points.map((p) => (
                         <li key={p} className="kl-body-sm">{p}</li>
@@ -135,9 +168,9 @@ export function LabsView() {
             <Reveal>
               <h2 className="kl-h1 mb-5">{l.ctaH}</h2>
               <p className="kl-body max-w-md mx-auto mb-10">{l.ctaBody}</p>
-              <Link href="/#contact" className="kl-cta-solid">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "labs" })} className="kl-cta-solid">
                 {l.ctaBtn} <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </Reveal>
           </div>
         </section>

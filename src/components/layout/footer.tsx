@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { useLang } from "@/i18n/language-provider";
+import { EMAIL, LINKEDIN_URL } from "@/lib/links";
 
 export function Footer() {
   const { t } = useLang();
@@ -19,8 +20,8 @@ export function Footer() {
             <p className="kl-body max-w-sm">{t.footer.tagline}</p>
 
             <div className="mt-10 space-y-2">
-              <p className="kl-eyebrow">Berlin · Zurich · Lyon · Lisbon</p>
-              <p className="kl-eyebrow">EN · FR · PT · DE</p>
+              <p className="kl-eyebrow">{t.footer.locations}</p>
+              <p className="kl-eyebrow">{t.footer.langs}</p>
             </div>
           </div>
 
@@ -44,9 +45,11 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-[rgba(244,241,233,0.08)] flex flex-col md:flex-row justify-between items-center gap-4 kl-body-sm">
           <p>© {new Date().getFullYear()} Syndao — {t.footer.rights}</p>
-          <div className="flex gap-6">
-            <a href="mailto:connect@synarkia.com" className="inline-block py-1 hover:text-light transition-colors">connect@synarkia.com</a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="inline-block py-1 hover:text-light transition-colors">LinkedIn</a>
+          <div className="flex flex-wrap gap-x-6 gap-y-1 md:justify-end">
+            <Link href="/legal" className="inline-block py-1 hover:text-light transition-colors">{t.footer.legal}</Link>
+            <Link href="/privacy" className="inline-block py-1 hover:text-light transition-colors">{t.footer.privacy}</Link>
+            <a href={`mailto:${EMAIL}`} className="inline-block py-1 hover:text-light transition-colors">{EMAIL}</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="inline-block py-1 hover:text-light transition-colors">LinkedIn</a>
           </div>
         </div>
       </Container>

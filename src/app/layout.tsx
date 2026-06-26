@@ -4,6 +4,7 @@ import "./globals.css";
 import { clsx } from "clsx";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { LanguageProvider } from "@/i18n/language-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 const cormorant = Cormorant({
   variable: "--font-cormorant",
@@ -24,10 +25,24 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400"],
 });
 
+const SITE_DESCRIPTION =
+  "Brands, websites, and automated systems for founders and small teams — designed with taste, built to run on their own.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://synarkia-v1.vercel.app"),
   title: "Syndao — Venture Lab & Studio",
-  description:
-    "A venture lab & studio building at the equilibrium of art, science, and metaphysics. Strategy, systems, and intelligent execution.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: "Syndao — Venture Lab & Studio",
+    description: SITE_DESCRIPTION,
+    siteName: "Syndao",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Syndao — Venture Lab & Studio",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -49,6 +64,7 @@ export default function RootLayout({
         <LanguageProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

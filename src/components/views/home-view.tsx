@@ -9,6 +9,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { CursorLight } from "@/components/ui/cursor-light";
 import InstrumentMount from "@/components/3d/instrument-mount";
 import { useLang } from "@/i18n/language-provider";
+import { BOOKING_URL } from "@/lib/links";
+import { track } from "@vercel/analytics";
 
 const serviceIcons = [Database, Code2, Sparkles, Zap, Rocket, Compass];
 
@@ -44,9 +46,9 @@ export function HomeView() {
               {h.hero.lead}
             </p>
             <div className="pointer-events-auto flex flex-col sm:flex-row items-center gap-4 animate-fade-in" style={{ animationDelay: "0.75s", opacity: 0 }}>
-              <Link href="#contact" className="kl-cta-solid">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "home_hero" })} className="kl-cta-solid">
                 {h.hero.cta1} <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
               <Link href="#services" className="kl-cta">
                 {h.hero.cta2}
               </Link>
@@ -189,6 +191,18 @@ export function HomeView() {
                 </div>
               </Reveal>
             </div>
+          </div>
+        </section>
+
+        {/* ════════ WHO ════════ */}
+        <section className="py-24 md:py-32 border-t border-[rgba(244,241,233,0.07)] relative overflow-hidden">
+          <div className="pointer-events-none absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[600px] h-[400px] kl-glow opacity-25" />
+          <div className="mx-auto w-full max-w-[860px] px-5 sm:px-8 relative z-10">
+            <Reveal>
+              <span className="kl-eyebrow">{h.who.eyebrow}</span>
+              <h2 className="kl-h2 mt-7 mb-7 max-w-2xl">{h.who.h}</h2>
+              <p className="kl-body max-w-xl">{h.who.body}</p>
+            </Reveal>
           </div>
         </section>
 

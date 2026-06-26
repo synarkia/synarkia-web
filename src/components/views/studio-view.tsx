@@ -8,6 +8,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { CursorLight } from "@/components/ui/cursor-light";
 import InstrumentMount from "@/components/3d/instrument-mount";
 import { useLang } from "@/i18n/language-provider";
+import { BOOKING_URL } from "@/lib/links";
+import { track } from "@vercel/analytics";
 
 const buildIcons = [Compass, Palette, PenLine, Layers];
 
@@ -127,9 +129,9 @@ export function StudioView() {
             <Reveal>
               <h2 className="kl-h1 mb-5">{s.ctaH}</h2>
               <p className="kl-body max-w-md mx-auto mb-10">{s.ctaBody}</p>
-              <Link href="/#contact" className="kl-cta-solid">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "studio" })} className="kl-cta-solid">
                 {s.ctaBtn} <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </Reveal>
           </div>
         </section>
