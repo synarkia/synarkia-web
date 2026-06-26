@@ -9,21 +9,29 @@ import { track } from "@vercel/analytics";
 export function Contact() {
   const { t } = useLang();
   const c = t.contact;
-  const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "", website: "" });
+  const sent = status === "sent";
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`New enquiry — ${form.service || "Syndao"} — ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\n\n${form.message}`
-    );
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-    track("form_submit", { service: form.service || "unspecified" });
-    setSent(true);
+    if (status === "sending") return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("send failed");
+      track("form_submit", { service: form.service || "unspecified" });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -88,12 +96,23 @@ export function Contact() {
                 </span>
                 <p className="kl-h3 text-light mb-2">{c.sentTitle}</p>
                 <p className="kl-body-sm max-w-xs">
-                  {c.sentBody} {EMAIL}.{" "}
+                  {c.sentBody}{" "}
                   <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="text-light underline underline-offset-4">{c.sentBook}</a>
                 </p>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">
+                {/* honeypot — hidden from people, catches bots */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={update("website")}
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <Field label={c.fName}>
                     <input required value={form.name} onChange={update("name")} placeholder={c.fNameP} className="kl-field w-full px-4 py-3 text-[15px]" />
@@ -119,9 +138,15 @@ export function Contact() {
                 <Field label={c.fMessage}>
                   <textarea required rows={4} value={form.message} onChange={update("message")} placeholder={c.fMessageP} className="kl-field w-full px-4 py-3 text-[15px] resize-none" />
                 </Field>
-                <button type="submit" className="kl-cta-solid w-full">
-                  {c.send} <Send className="w-4 h-4" />
+                <button type="submit" disabled={status === "sending"} className="kl-cta-solid w-full disabled:opacity-60 disabled:pointer-events-none">
+                  {status === "sending" ? c.sending : c.send} <Send className="w-4 h-4" />
                 </button>
+                {status === "error" && (
+                  <p className="kl-body-sm text-center">
+                    {c.error}{" "}
+                    <a href={`mailto:${EMAIL}`} className="text-light underline underline-offset-4">{EMAIL}</a>
+                  </p>
+                )}
               </form>
             )}
           </div>

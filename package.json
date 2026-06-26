@@ -25,6 +25,7 @@
     "ogl": "^1.0.11",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "resend": "^6.16.0",
     "tailwind-merge": "^3.4.0",
     "three": "^0.182.0",
     "unicornstudio-react": "^2.0.1-1"
