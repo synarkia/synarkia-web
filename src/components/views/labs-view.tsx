@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Mail, Filter, MessageCircle, FileText } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, LayoutDashboard, Bot, Zap, Filter, Share2 } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Reveal } from "@/components/ui/reveal";
@@ -11,7 +12,7 @@ import { useLang } from "@/i18n/language-provider";
 import { BOOKING_URL } from "@/lib/links";
 import { track } from "@vercel/analytics";
 
-const buildIcons = [Bot, Mail, Filter, MessageCircle, FileText];
+const buildIcons = [LayoutDashboard, Bot, Zap, Filter, Share2];
 
 export function LabsView() {
   const { t } = useLang();
@@ -45,23 +46,37 @@ export function LabsView() {
               <span className="kl-eyebrow">{l.flagship.eyebrow}</span>
             </Reveal>
             <Reveal>
-              <div className="kl-card p-9 md:p-12">
-                <div className="flex flex-wrap items-baseline justify-between gap-3 mb-8">
-                  <h3 className="kl-h2 text-light">{l.flagship.name}</h3>
-                  <span className="kl-mono text-smoke">{l.flagship.role}</span>
+              <div className="kl-card p-5 md:p-7">
+                {/* the proof: a real screenshot */}
+                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[linear-gradient(160deg,#131317,#0b0b0e)] border border-[rgba(244,241,233,0.08)] mb-8">
+                  <Image
+                    src="/work/encadrepro-1.jpg"
+                    alt="EncadrePro dashboard"
+                    fill
+                    sizes="(max-width: 1100px) 100vw, 1040px"
+                    className="object-cover object-top"
+                    priority
+                  />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 pt-8 border-t border-[rgba(244,241,233,0.07)]">
-                  <div>
-                    <span className="kl-eyebrow block mb-3">01 — Problem</span>
-                    <p className="kl-body">{l.flagship.problem}</p>
+
+                <div className="px-2 md:px-4 pb-2">
+                  <div className="flex flex-wrap items-baseline justify-between gap-3 mb-8">
+                    <h3 className="kl-h2 text-light">{l.flagship.name}</h3>
+                    <span className="kl-mono text-smoke">{l.flagship.role}</span>
                   </div>
-                  <div>
-                    <span className="kl-eyebrow block mb-3">02 — What we built</span>
-                    <p className="kl-body">{l.flagship.build}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 pt-8 border-t border-[rgba(244,241,233,0.07)]">
+                    <div>
+                      <span className="kl-eyebrow block mb-3">{l.flagship.problemLabel}</span>
+                      <p className="kl-body">{l.flagship.problem}</p>
+                    </div>
+                    <div>
+                      <span className="kl-eyebrow block mb-3">{l.flagship.buildLabel}</span>
+                      <p className="kl-body">{l.flagship.build}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-10 pt-6 border-t border-[rgba(244,241,233,0.07)]">
-                  <span className="kl-mono text-ash">{l.flagship.status}</span>
+                  <div className="mt-10 pt-6 border-t border-[rgba(244,241,233,0.07)]">
+                    <span className="kl-mono text-ash">{l.flagship.status}</span>
+                  </div>
                 </div>
               </div>
             </Reveal>

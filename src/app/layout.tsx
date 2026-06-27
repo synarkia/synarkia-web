@@ -26,21 +26,21 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 const SITE_DESCRIPTION =
-  "Brands, websites, and automated systems for founders and small teams — designed with taste, built to run on their own.";
+  "Brands, websites, and internal systems for founders and small teams, designed with taste and built to run on their own.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://synarkia-v1.vercel.app"),
-  title: "Syndao — Venture Lab & Studio",
+  title: "Syndao · Venture Lab & Studio",
   description: SITE_DESCRIPTION,
   openGraph: {
-    title: "Syndao — Venture Lab & Studio",
+    title: "Syndao · Venture Lab & Studio",
     description: SITE_DESCRIPTION,
     siteName: "Syndao",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Syndao — Venture Lab & Studio",
+    title: "Syndao · Venture Lab & Studio",
     description: SITE_DESCRIPTION,
   },
 };

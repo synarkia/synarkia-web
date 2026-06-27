@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { LabsView } from "@/components/views/labs-view";
 
 export const metadata: Metadata = {
-  title: "Lab — Syndao",
+  title: "Lab · Syndao",
   description:
-    "Syndao Lab builds the infrastructure that captures, qualifies, and converts — so you stop doing manually what a machine should be doing for you.",
+    "Syndao Lab builds the internal tools, AI systems, and automations that lift your response rate, lead generation, and invoicing.",
 };
 
 export default function LabsPage() {

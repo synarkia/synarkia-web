@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Syndao — Venture Lab & Studio";
+export const alt = "Syndao · Venture Lab & Studio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
         </div>
         <div style={{ display: "flex", fontSize: 132, letterSpacing: -2, lineHeight: 1 }}>Syndao</div>
         <div style={{ display: "flex", fontSize: 28, color: "#B6B3AB", marginTop: 32, maxWidth: 820, textAlign: "center" }}>
-          Brands, websites, and automated systems for founders and small teams.
+          Brands, websites, and internal systems for founders and small teams.
         </div>
       </div>
     ),

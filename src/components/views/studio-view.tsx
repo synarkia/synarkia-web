@@ -96,29 +96,22 @@ export function StudioView() {
               <p className="kl-body max-w-xl">{s.priceIntro}</p>
             </Reveal>
 
-            <Reveal>
-              <div className="kl-card overflow-hidden">
-                {s.engagements.map((e, i) => (
-                  <div
-                    key={e.name}
-                    className={`grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-6 items-baseline px-7 md:px-9 py-7 ${
-                      i > 0 ? "border-t border-[rgba(244,241,233,0.07)]" : ""
-                    }`}
-                  >
-                    <div className="sm:col-span-4">
-                      <h3 className="kl-h3 text-light">{e.name}</h3>
-                    </div>
-                    <p className="sm:col-span-5 kl-body-sm">{e.scope}</p>
-                    <div className="sm:col-span-3 sm:text-right">
-                      <p className="kl-metric text-light text-[1.6rem] leading-none">{e.price}</p>
-                      <p className="kl-eyebrow mt-2">{e.time}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+              {s.engagements.map((e, i) => (
+                <Reveal key={e.name} delay={(i % 3) * 0.08}>
+                  <div className="kl-card p-8 h-full flex flex-col">
+                    <h3 className="kl-h3 text-light mb-3">{e.name}</h3>
+                    <p className="kl-body-sm flex-1 mb-7">{e.scope}</p>
+                    <div className="pt-5 border-t border-[rgba(244,241,233,0.07)] flex items-baseline justify-between gap-3">
+                      <span className="kl-mono text-ash text-[13px]">{e.price}</span>
+                      <span className="kl-eyebrow">{e.time}</span>
                     </div>
                   </div>
-                ))}
-              </div>
-            </Reveal>
+                </Reveal>
+              ))}
+            </div>
             <Reveal delay={0.1}>
-              <p className="kl-body-sm mt-7 max-w-xl">{s.priceNote}</p>
+              <p className="kl-body-sm mt-8 max-w-xl">{s.priceNote}</p>
             </Reveal>
           </div>
         </section>

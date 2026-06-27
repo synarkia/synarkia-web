@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Database, Code2, Sparkles, Zap, Rocket, Compass, Check } from "lucide-react";
+import { ArrowRight, LayoutDashboard, Code2, Sparkles, Zap, Rocket, Compass, Check } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Contact } from "@/components/sections/contact";
@@ -13,7 +13,7 @@ import { useLang } from "@/i18n/language-provider";
 import { BOOKING_URL } from "@/lib/links";
 import { track } from "@vercel/analytics";
 
-const serviceIcons = [Database, Code2, Sparkles, Zap, Rocket, Compass];
+const serviceIcons = [LayoutDashboard, Zap, Code2, Sparkles, Rocket, Compass];
 
 export function HomeView() {
   const { t } = useLang();
@@ -153,19 +153,25 @@ export function HomeView() {
               <span className="kl-eyebrow">{h.method.eyebrow}</span>
               <h2 className="kl-h1 mt-6">{h.method.h}</h2>
             </Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
-              {h.method.steps.map((step, i) => (
-                <Reveal key={step.n} delay={(i % 3) * 0.08}>
-                  <div className="pt-7 border-t border-[rgba(244,241,233,0.12)] group">
-                    <div className="flex items-baseline gap-4 mb-4">
-                      <span className="kl-metric text-smoke group-hover:text-light transition-colors duration-500">{step.n}</span>
-                      <h3 className="kl-h3 text-light">{step.t}</h3>
+
+            {/* four-step process, purpose-built for exactly four */}
+            <div className="relative">
+              {/* connecting line through the nodes (desktop) */}
+              <div className="hidden lg:block absolute top-[23px] left-[7%] right-[7%] h-px bg-[linear-gradient(90deg,transparent,#3A3A3F_18%,#3A3A3F_82%,transparent)]" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+                {h.method.steps.map((step, i) => (
+                  <Reveal key={step.n} delay={i * 0.09}>
+                    <div className="group">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-full border border-[rgba(244,241,233,0.2)] bg-ink mb-7 group-hover:border-[rgba(244,241,233,0.5)] transition-colors">
+                        <span className="font-mono text-[13px] text-light">{step.n}</span>
+                      </div>
+                      <h3 className="kl-h3 text-light mb-2.5">{step.t}</h3>
+                      <p className="kl-body text-ash mb-1.5">{step.h}</p>
+                      <p className="kl-body-sm">{step.d}</p>
                     </div>
-                    <h4 className="kl-body text-light mb-2">{step.h}</h4>
-                    <p className="kl-body-sm">{step.d}</p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </div>
         </section>

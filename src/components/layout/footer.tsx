@@ -44,7 +44,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-[rgba(244,241,233,0.08)] flex flex-col md:flex-row justify-between items-center gap-4 kl-body-sm">
-          <p>© {new Date().getFullYear()} Syndao — {t.footer.rights}</p>
+          <p>© {new Date().getFullYear()} Syndao · {t.footer.rights}</p>
           <div className="flex flex-wrap gap-x-6 gap-y-1 md:justify-end">
             <Link href="/legal" className="inline-block py-1 hover:text-light transition-colors">{t.footer.legal}</Link>
             <Link href="/privacy" className="inline-block py-1 hover:text-light transition-colors">{t.footer.privacy}</Link>
