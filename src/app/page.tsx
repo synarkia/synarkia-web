@@ -324,7 +324,11 @@ export default function Home() {
             <div>
               <Reveal>
                 <p className="kl-eyebrow mb-6">VI · The Synarkic Constellation</p>
-                <h2 className="kl-h1 text-light mb-10">Six circles. One organism.</h2>
+                <h2 className="kl-h1 text-light mb-6">Six circles. One organism.</h2>
+                <p className="kl-body max-w-md mb-10">
+                  We have gathered the souls and aggregated the networks. They
+                  operate across distinct spheres, modeled as follows.
+                </p>
               </Reveal>
               <div className="space-y-px kl-border-t">
                 {CONSTELLATION.map((c, i) => (
@@ -354,16 +358,31 @@ export default function Home() {
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-px mt-16 kl-border-t">
-            {VENTURES.map((v, i) => (
-              <Reveal key={v.name} delay={i * 0.1}>
-                <div className="py-10 md:px-8 first:md:pl-0 h-full flex flex-col">
-                  <p className="kl-mono text-smoke mb-6">{v.tag}</p>
-                  <h3 className="kl-h2 text-light mb-1" style={{ fontSize: "2rem" }}>{v.name}</h3>
-                  <p className="kl-lead text-ash mb-5">{v.line}</p>
-                  <p className="kl-body-sm">{v.body}</p>
-                </div>
-              </Reveal>
-            ))}
+            {VENTURES.map((v, i) => {
+              const isLive = v.href && v.href !== "#";
+              return (
+                <Reveal key={v.name} delay={i * 0.1}>
+                  <a
+                    href={v.href}
+                    {...(isLive ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="group block py-10 md:px-8 first:md:pl-0 h-full transition-colors duration-500 hover:bg-graphite"
+                  >
+                    <div className="flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-6">
+                        <p className="kl-mono text-smoke">{v.tag}</p>
+                        <span className="kl-mono text-light tracking-[0.04em] border border-[rgba(244,241,233,0.16)] rounded-full px-3 py-1">
+                          {v.phase}
+                        </span>
+                      </div>
+                      <h3 className="kl-h2 text-light mb-1" style={{ fontSize: "2.6rem" }}>{v.name}</h3>
+                      <p className="kl-lead text-ash mb-5">{v.line}</p>
+                      <p className="kl-body-sm mb-8">{v.body}</p>
+                      <span className="kl-link mt-auto inline-block group-hover:text-light">{v.cta} →</span>
+                    </div>
+                  </a>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -265,10 +265,10 @@ html.lenis, html.lenis body {
 
 .kl-body-sm {
   font-family: var(--font-grotesk);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
-  line-height: 1.7;
-  color: var(--color-smoke);
+  line-height: 1.72;
+  color: var(--color-ash);
 }
 
 .kl-rule {

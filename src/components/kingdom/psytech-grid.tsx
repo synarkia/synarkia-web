@@ -91,7 +91,7 @@ const PSY_TECHS: PsyTech[] = [
     role: "Solar Technology",
     description:
       "Teachings on solar yoga, spiritual galvanoplasty, and the brotherhood of all beings. Focusing on light as a transformative principle.",
-    practices: ["Surya Yoga", "Panic Meditation", "Spiritual Galvanoplasty", "Light Nutrition"],
+    practices: ["Surya Yoga", "Laser Meditation", "Spiritual Galvanoplasty", "Light Nutrition"],
     concepts: ["Solar Consciousness", "Fraternity", "High Ideal", "Etheric Body"],
     links: [{ label: "Prosveta", url: "https://www.prosveta.com/" }],
   },
@@ -111,7 +111,7 @@ const PSY_TECHS: PsyTech[] = [
     role: "Relational Technology",
     description:
       "A practice of 'we-space' meditation. Revealing what is arising in the present moment of connection to deepen intimacy and uncover relational blind spots.",
-    practices: ["Birthday Circle", "Organic Circle", "Surrendered Leadership", "Noticing Aloud"],
+    practices: ["Noticing", "Feeling", "Imagining", "De-Armoring"],
     concepts: ["We-Space", "Intersubjectivity", "Authentic Relating", "Present Moment"],
     links: [{ label: "Circling Europe", url: "https://circling-europe.com/" }],
   },
