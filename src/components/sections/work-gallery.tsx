@@ -11,6 +11,7 @@ const IMAGES: Record<string, string[]> = {
   encadrepro: ["/work/encadrepro-1.jpg", "/work/encadrepro-2.jpg"],
   lux: ["/work/lux-1.jpg", "/work/lux-2.jpg"],
   cityzen: ["/work/cityzen-1.jpg"],
+  eauxchaotiques: ["/work/eauxchaotiques-1.jpg"],
 };
 
 type Project = {
