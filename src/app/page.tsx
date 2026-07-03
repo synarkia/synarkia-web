@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
 import { LightCursor } from "@/components/kingdom/light-cursor";
 import { LightsCanvas } from "@/components/kingdom/lights-canvas";
@@ -14,22 +13,12 @@ import {
   PILLARS,
   SYNARKS,
   PURE_PLAYER,
-  CONSTELLATION,
-  VENTURES,
   PORTAL,
 } from "@/lib/kingdom-data";
 
 const SECTION = "mx-auto max-w-[1280px] px-6 lg:px-10";
 
 export default function Home() {
-  // Constellation geometry, six circles around the held centre.
-  const cc = 200;
-  const cr = 150;
-  const nodes = CONSTELLATION.map((_, i) => {
-    const a = (Math.PI / 180) * (i * 60 - 90);
-    return { x: cc + cr * Math.cos(a), y: cc + cr * Math.sin(a) };
-  });
-
   return (
     <div className="kl min-h-screen relative" id="top">
       <LightCursor />
@@ -76,13 +65,9 @@ export default function Home() {
 
           <Reveal delay={0.5}>
             <div className="mt-14">
-              <Link href="#equilibrium" className="kl-cta">Enter the kingdom →</Link>
+              <a href="https://synarkia-field.vercel.app/enter" className="kl-cta">Enter the kingdom →</a>
             </div>
           </Reveal>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 kl-mono text-smoke kl-breathe">
-          ◎ scroll to descend
         </div>
       </section>
 
@@ -109,12 +94,8 @@ export default function Home() {
             <div className="space-y-10">
               <Reveal>
                 <p className="kl-body text-ash max-w-md">
-                  For most of history they were three rooms in one temple: beauty,
-                  truth, and goodness, held in a single breath. The modern world tore
-                  down the walls. Synarkia is the work of building them back. And when
-                  the three move as one again, something returns that we'd half-forgotten:
-                  meaning, and everything that follows it: direction, action that matters,
-                  the pull of moving toward something real.
+                  The primacy of beauty, the centrality of goodness, and the
+                  ultimacy of truth.
                 </p>
               </Reveal>
               <div className="space-y-px">
@@ -161,7 +142,7 @@ export default function Home() {
               ],
               [
                 "Wealth making",
-                "Abundance-driven systems and mechanisms for mutually beneficial exchanges with a common vision. Protocols, contracts, affiliations, partnerships, and a dedicated fund."
+                "Abundance-driven systems and mechanisms for mutually beneficial exchanges with a common vision. Protocols, contracts, affiliations, partnerships, and a dedicated venture studio."
               ],
             ].map(([t, d], i) => (
               <Reveal key={i} delay={i * 0.07}>
@@ -293,105 +274,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────── THE CONSTELLATION ───────────────── */}
-      <section id="constellation" className="relative py-28 md:py-40 bg-obsidian kl-border-t overflow-hidden">
-        <div className={SECTION}>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <Reveal>
-              <div className="relative mx-auto max-w-[460px]">
-                <div className="absolute inset-0 kl-glow scale-75" />
-                <svg viewBox="0 0 400 400" className="relative w-full kl-rotate-rev" aria-hidden>
-                  {nodes.map((n, i) => (
-                    <line key={`c${i}`} x1={cc} y1={cc} x2={n.x} y2={n.y} stroke="rgba(244,241,233,0.14)" strokeWidth="0.6" />
-                  ))}
-                  {nodes.map((n, i) => {
-                    const m = nodes[(i + 1) % nodes.length];
-                    return <line key={`r${i}`} x1={n.x} y1={n.y} x2={m.x} y2={m.y} stroke="rgba(244,241,233,0.1)" strokeWidth="0.6" />;
-                  })}
-                  <circle cx={cc} cy={cc} r="4" fill="#F4F1E9" />
-                  {nodes.map((n, i) => (
-                    <g key={`n${i}`}>
-                      <circle cx={n.x} cy={n.y} r="22" fill="#0B0B0E" stroke="rgba(244,241,233,0.25)" strokeWidth="0.75" />
-                      <text x={n.x} y={n.y + 6} textAnchor="middle" style={{ fontFamily: "var(--font-cormorant)", fontSize: 20, fill: "#F4F1E9" }}>
-                        {CONSTELLATION[i].glyph}
-                      </text>
-                    </g>
-                  ))}
-                </svg>
-              </div>
-            </Reveal>
-
-            <div>
-              <Reveal>
-                <p className="kl-eyebrow mb-6">VI · The Synarkic Constellation</p>
-                <h2 className="kl-h1 text-light mb-6">Six circles. One organism.</h2>
-                <p className="kl-body max-w-md mb-10">
-                  We have gathered the souls and aggregated the networks. They
-                  operate across distinct spheres, modeled as follows.
-                </p>
-              </Reveal>
-              <div className="space-y-px kl-border-t">
-                {CONSTELLATION.map((c, i) => (
-                  <Reveal key={c.name} delay={i * 0.05}>
-                    <div className="flex items-baseline gap-5 py-5 kl-border-t">
-                      <span className="text-light text-xl w-6" style={{ fontFamily: "var(--font-cormorant)" }}>{c.glyph}</span>
-                      <div>
-                        <p className="kl-lead text-light not-italic" style={{ fontStyle: "normal", fontSize: "1.3rem" }}>{c.name}</p>
-                        <p className="kl-mono text-smoke mt-1">{c.role}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ───────────────── ANCIENT FUTURES · VENTURES ───────────────── */}
-      <section id="ventures" className="relative py-28 md:py-40 kl-border-t">
-        <div className={SECTION}>
-          <Reveal>
-            <p className="kl-eyebrow mb-6">VII · Ancient Futures</p>
-            <h2 className="kl-h1 text-light max-w-2xl">
-              Where alchemy meets <span style={{ fontStyle: "italic" }}>decentralized intelligence.</span>
-            </h2>
-          </Reveal>
-          <div className="grid md:grid-cols-3 gap-px mt-16 kl-border-t">
-            {VENTURES.map((v, i) => {
-              const isLive = v.href && v.href !== "#";
-              return (
-                <Reveal key={v.name} delay={i * 0.1}>
-                  <a
-                    href={v.href}
-                    {...(isLive ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group block py-10 md:px-8 first:md:pl-0 h-full transition-colors duration-500 hover:bg-graphite"
-                  >
-                    <div className="flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-6">
-                        <p className="kl-mono text-smoke">{v.tag}</p>
-                        <span className="kl-mono text-light tracking-[0.04em] border border-[rgba(244,241,233,0.16)] rounded-full px-3 py-1">
-                          {v.phase}
-                        </span>
-                      </div>
-                      <h3 className="kl-h2 text-light mb-1" style={{ fontSize: "2.6rem" }}>{v.name}</h3>
-                      <p className="kl-lead text-ash mb-5">{v.line}</p>
-                      <p className="kl-body-sm mb-8">{v.body}</p>
-                      <span className="kl-link mt-auto inline-block group-hover:text-light">{v.cta} →</span>
-                    </div>
-                  </a>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* ───────────────── FOUNDER ───────────────── */}
       <section id="founder" className="relative py-28 md:py-40 bg-obsidian kl-border-t">
         <div className={`${SECTION} max-w-[900px]`}>
           <Reveal>
-            <p className="kl-eyebrow mb-8">VIII · The Architect</p>
+            <p className="kl-eyebrow mb-8">VI · The Architect</p>
             <p className="kl-lead text-ash mb-8">
               &ldquo;How do we make the best decisions, for ourselves, for our
               networks, for life?&rdquo;
@@ -416,7 +303,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] kl-glow pointer-events-none" />
         <div className={`${SECTION} relative z-10`}>
           <Reveal>
-            <p className="kl-eyebrow text-center mb-10">IX · The Invitation</p>
+            <p className="kl-eyebrow text-center mb-10">VII · The Invitation</p>
             <h2 className="kl-display text-light text-center kl-text-glow mb-12" style={{ fontSize: "clamp(2.6rem,7vw,6rem)" }}>
               Compose the
               <br />
@@ -446,8 +333,8 @@ export default function Home() {
 
           <Reveal delay={0.2}>
             <div className="text-center mt-20">
-              <a href="mailto:leizagato@gmail.com?subject=Desires%2C%20Needs%20%26%20Gifts" className="kl-cta">
-                Share your gift →
+              <a href="https://synarkia-field.vercel.app/enter" className="kl-cta">
+                Enter the kingdom →
               </a>
               <p className="kl-lead text-smoke mt-12">
                 If this calls you, you&rsquo;re already inside. Welcome to Synarkia.

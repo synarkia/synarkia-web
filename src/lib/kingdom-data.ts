@@ -59,48 +59,6 @@ export const PURE_PLAYER = [
   "Honest emotional expression",
 ] as const;
 
-// The Synarkic Constellation, organizational circles.
-export const CONSTELLATION = [
-  { glyph: "✦", name: "Wisdom Council", role: "Guidance · coherence · vision" },
-  { glyph: "✶", name: "Operations Ring", role: "Execution · logistics · finance" },
-  { glyph: "❖", name: "Tech Guild", role: "Architecture · digital design" },
-  { glyph: "✷", name: "Hermes Flow", role: "Communication · events · energy" },
-  { glyph: "✧", name: "Creative Guild", role: "Design · narrative · aesthetics" },
-  { glyph: "◈", name: "Healing Circle", role: "Product · sensory · wellness" },
-] as const;
-
-// Ancient futures, the ventures.
-// Ordered as a living roadmap, by what is in motion now.
-export const VENTURES = [
-  {
-    tag: "Foresight",
-    name: "Hermes Flow",
-    line: "Composing the new world",
-    body: "Inner-alchemy and strategic foresight for visionary leaders, systemic design where soul meets structure. Years in the making, currently flowing through Hedoné.",
-    phase: "In motion · now",
-    cta: "Visit Hedoné",
-    href: "https://www.instagram.com/hedone.world/",
-  },
-  {
-    tag: "Alchemy",
-    name: "Vie Pure",
-    line: "Nature, Perfected",
-    body: "Handcrafted spagyric tinctures for vitality and consciousness, the first public work under the Synarkia umbrella.",
-    phase: "Paused · resuming",
-    cta: "Follow Vie Pure",
-    href: "https://www.instagram.com/viepure.co/",
-  },
-  {
-    tag: "Studio & Lab",
-    name: "Syndao",
-    line: "Brands, sites & systems that run on their own",
-    body: "A venture lab and studio. Brand, website, and internal AI tooling built as one, so founders and small teams ship with taste and run on their own.",
-    phase: "Live · the studio",
-    cta: "Enter Syndao",
-    href: "https://synarkia-v1-59c82xndi-synarks-projects.vercel.app",
-  },
-] as const;
-
 // Desires · Needs · Gifts portal.
 export const PORTAL = [
   { word: "Desires", def: "Dream projects, visions, future seeds.", q: "What you came to create." },

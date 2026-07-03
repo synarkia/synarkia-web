@@ -9,7 +9,6 @@ const links = [
   { name: "Ecosystem", href: "/#ecosystem" },
   { name: "Psychotechnologies", href: "/psychotechnologies" },
   { name: "Mentors", href: "/mentors" },
-  { name: "Ventures", href: "/#ventures" },
 ];
 
 export function KLNav() {
@@ -52,9 +51,9 @@ export function KLNav() {
           })}
         </nav>
 
-        <Link href="/#invitation" className="kl-link border border-[rgba(244,241,233,0.2)] rounded-full px-5 py-2.5 hover:bg-light hover:text-ink transition-colors">
+        <a href="https://synarkia-field.vercel.app/enter" className="kl-link border border-[rgba(244,241,233,0.2)] rounded-full px-5 py-2.5 hover:bg-light hover:text-ink transition-colors">
           Enter
-        </Link>
+        </a>
       </div>
     </header>
   );
