@@ -28,8 +28,8 @@ export async function POST(req: Request) {
   // honeypot — bots fill this hidden field; drop silently
   if (website) return Response.json({ ok: true });
 
-  if (!name || !email || !message) {
-    return Response.json({ ok: false, error: "Please fill in your name, email, and message." }, { status: 400 });
+  if (!name || !email) {
+    return Response.json({ ok: false, error: "Please fill in your name and email." }, { status: 400 });
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ ok: false, error: "Please enter a valid email." }, { status: 400 });
@@ -37,15 +37,15 @@ export async function POST(req: Request) {
 
   const html = `
     <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.6">
-      <h2 style="margin:0 0 16px">New enquiry — Syndao</h2>
+      <h2 style="margin:0 0 16px">New free audit request — Syndao</h2>
       <table style="border-collapse:collapse">
         <tr><td style="padding:4px 16px 4px 0;color:#666">Name</td><td><strong>${esc(name)}</strong></td></tr>
         <tr><td style="padding:4px 16px 4px 0;color:#666">Email</td><td><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
         <tr><td style="padding:4px 16px 4px 0;color:#666">Company</td><td>${esc(company) || "—"}</td></tr>
         <tr><td style="padding:4px 16px 4px 0;color:#666">Service</td><td>${esc(service) || "—"}</td></tr>
       </table>
-      <p style="margin:20px 0 6px;color:#666">Message</p>
-      <p style="white-space:pre-wrap;margin:0;padding:14px 16px;background:#f6f6f6;border-radius:8px">${esc(message)}</p>
+      <p style="margin:20px 0 6px;color:#666">Notes</p>
+      <p style="white-space:pre-wrap;margin:0;padding:14px 16px;background:#f6f6f6;border-radius:8px">${esc(message) || "—"}</p>
     </div>`;
 
   try {
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
       from: FROM,
       to: [TO],
       replyTo: email,
-      subject: `New enquiry — ${service || "Syndao"} — ${name}`,
+      subject: `New audit request — ${service || "Syndao"} — ${name}`,
       html,
     });
     if (error) {

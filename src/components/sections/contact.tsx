@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Calendar, Mail, Linkedin, ArrowRight, Send, Check } from "lucide-react";
+import { Calendar, Mail, ArrowRight, Send, Check } from "lucide-react";
 import { useLang } from "@/i18n/language-provider";
-import { BOOKING_URL, EMAIL, LINKEDIN_URL } from "@/lib/links";
+import { BOOKING_URL, EMAIL } from "@/lib/links";
 import { track } from "@vercel/analytics";
 
 export function Contact() {
@@ -46,46 +46,8 @@ export function Contact() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-          {/* LEFT — booking + direct */}
-          <div className="space-y-6">
-            <div className="kl-card p-8 md:p-10">
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="w-5 h-5 text-light" strokeWidth={1.4} />
-                <h3 className="kl-h3 text-light">{c.bookTitle}</h3>
-              </div>
-              <p className="kl-body mb-8">{c.bookDesc}</p>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "contact" })} className="kl-cta-solid w-full">
-                {c.schedule} <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-
-            <div>
-              <p className="kl-eyebrow mb-4">{c.direct}</p>
-              <div className="space-y-3">
-                <a href={`mailto:${EMAIL}`} className="kl-card flex items-center gap-4 p-5 group">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(244,241,233,0.12)] group-hover:border-[rgba(244,241,233,0.3)] transition-colors">
-                    <Mail className="w-4 h-4 text-ash group-hover:text-light transition-colors" strokeWidth={1.4} />
-                  </span>
-                  <span>
-                    <span className="kl-eyebrow block mb-1">{c.emailLabel}</span>
-                    <span className="kl-body text-light">{EMAIL}</span>
-                  </span>
-                </a>
-                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="kl-card flex items-center gap-4 p-5 group">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(244,241,233,0.12)] group-hover:border-[rgba(244,241,233,0.3)] transition-colors">
-                    <Linkedin className="w-4 h-4 text-ash group-hover:text-light transition-colors" strokeWidth={1.4} />
-                  </span>
-                  <span>
-                    <span className="kl-eyebrow block mb-1">{c.linkedinLabel}</span>
-                    <span className="kl-body text-light">{c.linkedinValue}</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT — message form */}
-          <div className="kl-card p-8 md:p-10">
+          {/* PRIMARY — the free audit */}
+          <div id="audit" className="kl-card p-8 md:p-10 border-[rgba(244,241,233,0.22)] scroll-mt-28">
             <h3 className="kl-h3 text-light mb-2">{c.formTitle}</h3>
             <p className="kl-body-sm mb-8">{c.formDesc}</p>
 
@@ -136,7 +98,7 @@ export function Contact() {
                   </div>
                 </Field>
                 <Field label={c.fMessage}>
-                  <textarea required rows={4} value={form.message} onChange={update("message")} placeholder={c.fMessageP} className="kl-field w-full px-4 py-3 text-[15px] resize-none" />
+                  <textarea rows={4} value={form.message} onChange={update("message")} placeholder={c.fMessageP} className="kl-field w-full px-4 py-3 text-[15px] resize-none" />
                 </Field>
                 <button type="submit" disabled={status === "sending"} className="kl-cta-solid w-full disabled:opacity-60 disabled:pointer-events-none">
                   {status === "sending" ? c.sending : c.send} <Send className="w-4 h-4" />
@@ -149,6 +111,33 @@ export function Contact() {
                 )}
               </form>
             )}
+          </div>
+
+          {/* SECONDARY — the call, then direct contact */}
+          <div className="space-y-6">
+            <div className="kl-card p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-4">
+                <Calendar className="w-5 h-5 text-light" strokeWidth={1.4} />
+                <h3 className="kl-h3 text-light">{c.bookTitle}</h3>
+              </div>
+              <p className="kl-body mb-8">{c.bookDesc}</p>
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "contact" })} className="kl-cta w-full">
+                {c.schedule} <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            <div>
+              <p className="kl-eyebrow mb-4">{c.direct}</p>
+              <a href={`mailto:${EMAIL}`} className="kl-card flex items-center gap-4 p-5 group">
+                <span className="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(244,241,233,0.12)] group-hover:border-[rgba(244,241,233,0.3)] transition-colors">
+                  <Mail className="w-4 h-4 text-ash group-hover:text-light transition-colors" strokeWidth={1.4} />
+                </span>
+                <span>
+                  <span className="kl-eyebrow block mb-1">{c.emailLabel}</span>
+                  <span className="kl-body text-light">{EMAIL}</span>
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -63,7 +63,7 @@ export function Navbar() {
           <LanguageToggle className="hidden md:flex ml-1" />
 
           <Link
-            href="/#contact"
+            href="/#audit"
             className="hidden md:flex items-center px-5 h-11 rounded-full bg-light text-ink hover:bg-[rgba(244,241,233,0.85)] transition-colors ml-1 font-mono text-[11px] uppercase tracking-[0.18em]"
           >
             {t.nav.contact}
@@ -98,7 +98,7 @@ export function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <Link href="/#contact" onClick={() => setIsOpen(false)} className="mt-4 kl-cta-solid">
+              <Link href="/#audit" onClick={() => setIsOpen(false)} className="mt-4 kl-cta-solid">
                 {t.nav.contact}
               </Link>
               <LanguageToggle className="mt-2" />

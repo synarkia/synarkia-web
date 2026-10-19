@@ -1,5 +1,5 @@
 "use client";
-/** Summit — a contour-line mountain that keeps rising out of noise. Vibe Coding. */
+/** Summit — a contour-line mountain that keeps rising out of noise. Websites & Apps. */
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";

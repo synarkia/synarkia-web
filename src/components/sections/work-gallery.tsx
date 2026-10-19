@@ -20,6 +20,7 @@ type Project = {
   tag: string;
   desc: string;
   meta: string;
+  venture?: string;
   href?: string;
   quote?: string;
   author?: string;
@@ -97,9 +98,10 @@ export function WorkGallery() {
                   <Carousel images={IMAGES[p.key] ?? []} alt={p.name} />
                 </div>
                 <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
                     <h3 className="kl-h2 text-light">{p.name}</h3>
                     <span className="kl-mono text-smoke">· {p.meta}</span>
+                    {p.venture && <span className="kl-mono text-smoke">· {p.venture}</span>}
                   </div>
                   <p className="kl-eyebrow mb-5">{p.tag}</p>
                   <p className="kl-body mb-6">{p.desc}</p>
@@ -123,7 +125,7 @@ export function WorkGallery() {
         </div>
 
         <Reveal className="mt-14 text-center">
-          <Link href="#contact" className="kl-link inline-flex items-center gap-2">
+          <Link href="#audit" className="kl-link inline-flex items-center gap-2">
             {w.cta} <ArrowUpRight className="w-4 h-4" />
           </Link>
         </Reveal>

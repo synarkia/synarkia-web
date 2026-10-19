@@ -5,7 +5,7 @@
  *
  * One scroll-driven journey in four acts:
  *   I   STRUCTURE  the geodesic lattice: the system before it carries anything
- *   II  WORLD      real coastlines settle onto the lattice, outward from Lyon
+ *   II  WORLD      real coastlines settle onto the lattice, outward from Paris
  *   III FLOW       great-circle routes draw to real cities, packets run them
  *   IV  REACH      the camera pulls back, a wavefront crosses the sphere,
  *                  orbital shells fade in around it
@@ -100,11 +100,12 @@ const LAND_VERT = `
     // coastlines read brighter and larger than interior fill, so the outlines carry the detail
     float coastW = 0.5 + aCoast * 0.8;
     float sizeW = 0.6 + aCoast * 0.62 + 0.3 * aSeed;
-    // a sparse few points behave like live nodes and pulse
-    float tw = step(0.93, aSeed) * smoothstep(0.9, 1.0, sin(uTime * (0.7 + aSeed * 2.3) + aSeed * 51.0));
+    // a sparse few points breathe, slowly, so nothing blinks
+    float tw = step(0.93, aSeed) * (0.5 + 0.5 * sin(uTime * 0.5 + aSeed * 51.0));
 
-    vAlpha = (uOpacity * m * coastW + hot * 0.6 + tw * 0.5 * m) * face;
-    gl_PointSize = (uSize * (sizeW + hot * 1.5 + tw * 1.2)) * uScale / max(0.001, -mv.z);
+    vAlpha = (uOpacity * m * coastW + hot * 0.6 + tw * 0.16 * m) * face;
+    // never let a point fall under a pixel: sub-pixel points shimmer as the globe turns
+    gl_PointSize = max(1.6, (uSize * (sizeW + hot * 1.5 + tw * 0.3)) * uScale / max(0.001, -mv.z));
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -127,7 +128,7 @@ const FADE_VERT = `
   void main() {
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
     vF = depthFade(mv, uR);
-    gl_PointSize = uSize * uScale / max(0.001, -mv.z);
+    gl_PointSize = max(1.35, uSize * uScale / max(0.001, -mv.z));
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -223,13 +224,28 @@ function dms(v: number, axis: "NS" | "EW") {
 const ACTS = ["I · STRUCTURE", "II · WORLD", "III · FLOW", "IV · REACH"];
 
 function Scene({
-  hostRef,
+  getProgress,
   reduced,
   onTelemetry,
+  dim = 1,
+  lookY = 0,
+  smooth = 0,
+  drift = 0,
+  getOutro,
 }: {
-  hostRef: React.RefObject<HTMLDivElement | null>;
+  getProgress: () => number;
   reduced: boolean;
   onTelemetry: (t: Telemetry) => void;
+  /** overall brightness, lowered when the scene sits behind type */
+  dim?: number;
+  /** raise the camera target to push the globe lower in frame */
+  lookY?: number;
+  /** seconds of easing applied to progress: 0 scrubs exactly, higher glides */
+  smooth?: number;
+  /** slow continuous turn in rad/s, so the globe lives when nothing is scrolling */
+  drift?: number;
+  /** 0..1 of travel after the journey is finished: it keeps receding, leading the page down */
+  getOutro?: () => number;
 }) {
   const { camera, size, pointer } = useThree();
   const globe = useRef<THREE.Group>(null);
@@ -260,7 +276,7 @@ function Scene({
       from[i * 3] = v.x * k + (r() - 0.5) * 0.12;
       from[i * 3 + 1] = v.y * k + (r() - 0.5) * 0.12;
       from[i * 3 + 2] = v.z * k + (r() - 0.5) * 0.12;
-      // the world assembles outward from Lyon
+      // the world assembles outward from Paris
       stagger[i] = Math.acos(Math.max(-1, Math.min(1, v.dot(originVec)))) / Math.PI;
       seed[i] = r();
       coast[i] = coastFlags[i] ?? 0;
@@ -499,13 +515,13 @@ function Scene({
   }, [originVec, shellData]);
 
   useFrame((state, delta) => {
-    /* ----- scroll progress ----- */
-    const host = hostRef.current;
-    if (host) {
-      const rect = host.getBoundingClientRect();
-      const span = rect.height - window.innerHeight;
-      p.current = span > 0 ? clamp01(-rect.top / span) : 0;
-    }
+    /* ----- progress, optionally eased so fast scrolls glide rather than snap ----- */
+    // progress is a pure function of scroll, lightly damped: it runs the same
+    // backwards as forwards, and settles exactly where the scroll says
+    const target = getProgress();
+    const dt = Math.min(delta, 1 / 30);
+    p.current = smooth > 0 ? p.current + (target - p.current) * (1 - Math.exp(-dt / smooth)) : target;
+    if (Math.abs(target - p.current) < 0.0004) p.current = target;
     const P = p.current;
     const t = state.clock.elapsedTime;
     const idle = reduced ? 0 : 1;
@@ -518,15 +534,20 @@ function Scene({
     // horizontal field of view is the binding constraint
     const aspect = size.width / Math.max(1, size.height);
     const fit = Math.min(2.2, Math.max(1, 1 / Math.min(1, aspect * 1.15)));
-    camera.position.set((camX + pointer.x * 0.25) * fit, (camY - pointer.y * 0.2) * fit, camZ * fit);
-    camera.lookAt(0, 0, 0);
+    // once the journey is complete the globe keeps moving with the page:
+    // it draws back and settles lower, leading the reader into what follows
+    const outro = getOutro ? getOutro() : 0;
+    // it drops out from behind the type early, then keeps drawing back slowly
+    const eo = Math.pow(outro, 0.62);
+    camera.position.set((camX + pointer.x * 0.25) * fit, (camY - pointer.y * 0.2) * fit, (camZ + eo * 9.0) * fit);
+    camera.lookAt(0, lookY + eo * 3.6, 0);
 
     /* ----- globe orientation, driven by scroll ----- */
     if (globe.current) {
       // Centre the view ~27deg west of the origin meridian: that puts Europe and the
       // hub right of centre and brings the Americas fully into the left of frame.
       const face = -(ORIGIN.lon - 27) * D2R;
-      globe.current.rotation.y = face - 0.85 + ramp(P, 0, 0.55) * 0.85 + ramp(P, 0.55, 1) * 0.3 + pointer.x * 0.12 + Math.sin(t * 0.11) * 0.015 * idle;
+      globe.current.rotation.y = face - 0.85 + ramp(P, 0, 0.55) * 0.85 + ramp(P, 0.55, 1) * 0.3 + t * drift + pointer.x * 0.12 + Math.sin(t * 0.11) * 0.015 * idle;
       // tilt keeps the origin latitude in the upper middle of frame rather than on the rim
       globe.current.rotation.x = lerp(0.40, 0.30, ramp(P, 0, 0.5)) + ramp(P, 0.7, 1) * 0.1 - pointer.y * 0.1;
       globe.current.rotation.z = Math.sin(t * 0.07) * 0.01 * idle;
@@ -535,9 +556,9 @@ function Scene({
     /* ----- act I: lattice ----- */
     const latticeIn = ramp(P, 0.0, 0.12);
     const latticeOut = 1 - ramp(P, 0.22, 0.46) * 0.955;
-    mats.lattice.opacity = 0.3 * latticeIn * latticeOut;
-    mats.frame.opacity = 0.12 * latticeIn * (1 - ramp(P, 0.3, 0.52) * 0.55);
-    mats.nodes.opacity = 0.55 * latticeIn * (1 - ramp(P, 0.2, 0.42) * 0.94);
+    mats.lattice.opacity = 0.3 * dim * latticeIn * latticeOut;
+    mats.frame.opacity = 0.12 * dim * latticeIn * (1 - ramp(P, 0.3, 0.52) * 0.55);
+    mats.nodes.opacity = 0.55 * dim * latticeIn * (1 - ramp(P, 0.2, 0.42) * 0.94);
 
     /* ----- act II: the world settles ----- */
     const wave = ramp(P, 0.74, 1) * Math.PI * 1.04;
@@ -545,7 +566,7 @@ function Scene({
     {
       const u = mats.land.uniforms;
       u.uMorph.value = ramp(P, 0.14, 0.56);
-      u.uOpacity.value = 0.82 * ramp(P, 0.14, 0.34);
+      u.uOpacity.value = 0.82 * dim * ramp(P, 0.14, 0.34);
       u.uScale.value = size.height * 0.62;
       u.uWave.value = wave;
       u.uWave2.value = wave2;
@@ -553,9 +574,9 @@ function Scene({
       u.uBand.value = 0.1;
       u.uTime.value = t;
     }
-    mats.graticule.uniforms.uOpacity.value = 0.13 * ramp(P, 0.2, 0.42);
+    mats.graticule.uniforms.uOpacity.value = 0.13 * dim * ramp(P, 0.2, 0.42);
     mats.graticule.uniforms.uScale.value = size.height * 0.62;
-    mats.rim.uniforms.uOpacity.value = 0.2 * ramp(P, 0.18, 0.45);
+    mats.rim.uniforms.uOpacity.value = 0.2 * dim * ramp(P, 0.18, 0.45);
 
     /* ----- act III: bundles and packets ----- */
     let links = 0;
@@ -567,7 +588,7 @@ function Scene({
       const drawn = ramp(P, rt.start, rt.start + 0.1);
       const u = rt.mat.uniforms;
       u.uReveal.value = drawn;
-      u.uOpacity.value = 0.72 * (drawn > 0 ? 1 : 0);
+      u.uOpacity.value = 0.72 * dim * (drawn > 0 ? 1 : 0);
       u.uTime.value = t;
       if (drawn > 0.999) links++;
       if (i === Math.floor((t * 0.22) % routes.length)) {
@@ -625,7 +646,7 @@ function Scene({
     });
 
     /* ----- act IV: orbital shells ----- */
-    const shellIn = 0.4 * ramp(P, 0.7, 0.92);
+    const shellIn = 0.4 * dim * ramp(P, 0.7, 0.92);
     mats.shells.forEach((m) => {
       m.uniforms.uOpacity.value = shellIn;
       m.uniforms.uScale.value = size.height * 0.62;
@@ -751,6 +772,14 @@ export default function PlanetaryReach({ hud = false }: { hud?: boolean }) {
     return () => io.disconnect();
   }, []);
 
+  const labProgress = () => {
+    const el = host.current;
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const span = rect.height - window.innerHeight;
+    return span > 0 ? clamp01(-rect.top / span) : 0;
+  };
+
   const onTelemetry = (t: Telemetry) => {
     if (!hud) return;
     if (act.current) act.current.textContent = t.act;
@@ -772,7 +801,7 @@ export default function PlanetaryReach({ hud = false }: { hud?: boolean }) {
               gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             >
               <Suspense fallback={null}>
-                <Scene hostRef={host} reduced={reduced} onTelemetry={onTelemetry} />
+                <Scene getProgress={labProgress} reduced={reduced} onTelemetry={onTelemetry} />
                 <EffectComposer>
                   <Bloom intensity={0.5} luminanceThreshold={0.55} luminanceSmoothing={0.85} mipmapBlur radius={0.68} />
                 </EffectComposer>
@@ -807,6 +836,96 @@ export default function PlanetaryReach({ hud = false }: { hud?: boolean }) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+
+/**
+ * PlanetaryHero — the same scene as a hero background.
+ *
+ * It must look finished the moment the page loads, so the journey plays itself
+ * from the lattice up to live links over the first few seconds, and from there
+ * scrolling out of the hero drives the reach act.
+ */
+export function PlanetaryHero({ dim, lookY = 0.95 }: { dim?: number; lookY?: number }) {
+  const reduced = useReducedMotion();
+  const started = useRef(0);
+  const shell = useRef<HTMLDivElement>(null);
+
+  const FLOOR = 0.1; // first paint already has the lattice, never an empty frame
+  const AMBIENT_MS = 19000; // untouched at the top, the world still builds itself
+
+  // the globe competes with the type on a phone, so it sits back a little there
+  const [auto, setAuto] = useState(1);
+  useEffect(() => {
+    setAuto(window.innerWidth < 768 ? 0.72 : 1);
+  }, []);
+
+  /**
+   * The globe finishes its journey inside the hero and then stays.
+   * It steps back so the sentence can be read over it, holds there while the
+   * words arrive, and only hands over in the last stretch before the next scene.
+   */
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const el = shell.current;
+      if (el) {
+        const vh = Math.max(1, window.innerHeight);
+        const y = window.scrollY / vh;
+        const settle = 1 - clamp01((y - 1.25) / 0.7) * 0.58; // steps back, does not leave
+        const handover = 1 - clamp01((y - 3.95) / 0.6); // only now does it give way
+        const f = settle * handover;
+        el.style.opacity = String(f * f * (3 - 2 * f));
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const getOutro = () => {
+    if (typeof window === "undefined") return 0;
+    const vh = Math.max(1, window.innerHeight);
+    return clamp01((window.scrollY / vh - 1.1) / 3.2);
+  };
+
+  const getProgress = () => {
+    if (typeof window === "undefined") return FLOOR;
+    if (!started.current) started.current = performance.now();
+    // at the very top, with no scroll yet, it still builds itself
+    const ambient = reduced ? 1 : clamp01((performance.now() - started.current) / AMBIENT_MS);
+    const idle = FLOOR + ambient * ambient * (3 - 2 * ambient) * 0.5;
+    // once the page moves, scroll owns it completely, and reverses it exactly
+    const scrolled = clamp01(window.scrollY / Math.max(1, window.innerHeight * 1.1));
+    return Math.max(idle * (1 - clamp01(scrolled * 6)), scrolled);
+  };
+
+  return (
+    <div ref={shell} className="w-full h-full">
+      <Canvas
+        className="w-full h-full"
+        camera={{ position: [0, 1.1, 14.6], fov: 40 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      >
+        <Suspense fallback={null}>
+          <Scene
+            getProgress={getProgress}
+            reduced={reduced}
+            onTelemetry={() => {}}
+            dim={dim ?? auto}
+            lookY={lookY}
+            smooth={0.18}
+            drift={0.012}
+            getOutro={getOutro}
+          />
+          <EffectComposer>
+            <Bloom intensity={0.5} luminanceThreshold={0.55} luminanceSmoothing={0.85} mipmapBlur radius={0.68} />
+          </EffectComposer>
+        </Suspense>
+      </Canvas>
     </div>
   );
 }

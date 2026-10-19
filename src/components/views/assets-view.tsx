@@ -22,6 +22,7 @@ const OrbitField = load(() => import("@/components/3d/lab/orbit-field"));
 const MethodTunnel = load(() => import("@/components/3d/lab/method-tunnel"));
 const Plume = load(() => import("@/components/3d/lab/plume"));
 const PlanetaryReach = dynamic(() => import("@/components/3d/lab/planetary-reach"), { ssr: false, loading: () => null });
+const Momentum = dynamic(() => import("@/components/3d/lab/momentum"), { ssr: false, loading: () => null });
 
 type Asset = {
   id: string;
@@ -72,9 +73,9 @@ const ASSETS: Asset[] = [
     Scene: LatticeSphere,
   },
   {
-    id: "summit", n: "04", service: "Vibe Coding Development", title: "Summit",
+    id: "summit", n: "04", service: "Websites & Apps", title: "Summit",
     reads: "A contour-line mountain rising out of noise and never settling. Prototype to production, in one continuous surface.",
-    placement: "Vibe Coding card background, or a wide band above the Work gallery.",
+    placement: "Websites & Apps card background, or a wide band above the Work gallery.",
     tech: "R3F · single lineSegments (≈10k segs) · GLSL simplex displacement in the vertex shader · height/depth fade",
     Scene: Terrain,
   },
@@ -219,15 +220,16 @@ export function AssetsView() {
           <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
             <Reveal>
               <span className="kl-eyebrow">Asset Lab · internal review · not indexed</span>
-              <h1 className="kl-h1 mt-7 mb-8 max-w-3xl">Eleven pieces of light, one per thing we do.</h1>
+              <h1 className="kl-h1 mt-7 mb-8 max-w-3xl">Two pieces of light, and they are one piece.</h1>
               <p className="kl-lead max-w-2xl">
                 Every scene is code, not video: monochrome, real-time, mouse-aware, and rendered only while on screen.
-                Each one is mapped to a Syndao service or section so we can decide where it lives. Start with 00, it is the one built to carry the whole story.
+                These two run back to back on the homepage: the globe carries the hero, and the second begins in the background of the section below it.
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <ol className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 kl-mono text-[11px] tracking-[0.14em] text-ash">
-                <li className="col-span-2 md:col-span-5 pb-2"><a href="#planetary-reach" className="kl-link text-light/90">00 · PLANETARY REACH  (FEATURED · SCROLL-DRIVEN)</a></li>
+              <ol className="mt-12 flex flex-col gap-3 kl-mono text-[11px] tracking-[0.14em] text-ash">
+                <li><a href="#planetary-reach" className="kl-link text-light/90">01 · PLANETARY REACH  (THE HERO)</a></li>
+                <li><a href="#momentum" className="kl-link text-light/90">02 · MOMENTUM  (THE SECTION BELOW IT)</a></li>
                 {ASSETS.map((a) => (
                   <li key={a.id}><a href={`#${a.id}`} className="kl-link">{a.n} · {a.title.toUpperCase()}</a></li>
                 ))}
@@ -306,31 +308,68 @@ export function AssetsView() {
           </div>
         </section>
 
-        {ASSETS.map((a, i) => <Frame key={a.id} a={a} index={i} />)}
-
-        {/* 10 · SVG diagram */}
-        <section id="one-system" className="py-16 md:py-24 border-t border-[rgba(244,241,233,0.07)]">
-          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
+        {/* ════════ 00B · FEATURED — the Signal sentence, drawn ════════ */}
+        <section id="momentum" className="border-t border-[rgba(244,241,233,0.07)]">
+          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pt-16 md:pt-24 pb-10">
             <Reveal>
               <div className="flex flex-wrap items-baseline justify-between gap-4 mb-6">
-                <div className="flex items-baseline gap-5"><span className="kl-mono text-smoke">10</span><h2 className="kl-h3">One System</h2></div>
-                <span className="kl-eyebrow">The Signal · what we build as one</span>
+                <div className="flex items-baseline gap-5">
+                  <span className="kl-mono text-smoke">00B</span>
+                  <h2 className="kl-h2">Momentum</h2>
+                </div>
+                <span className="kl-eyebrow">Featured · the Signal, drawn</span>
+              </div>
+              <p className="kl-lead max-w-3xl">
+                One filament carries the whole argument. A clean idea travels, starts looping back on itself, knots into
+                turbulence and stops advancing. That is the gap. Then the strands find one line again, drive to a point,
+                and the point catches.
+              </p>
+            </Reveal>
+          </div>
+
+          <Momentum />
+
+          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pt-12 pb-16 md:pb-24">
+            <Reveal>
+              <div className="grid grid-cols-2 md:grid-cols-6 gap-6 md:gap-8">
+                {[
+                  ["I · Line", "A good idea, travelling clean."],
+                  ["II · Tangle", "It starts looping back through itself."],
+                  ["III · Snarl", "Turbulence. It stops advancing. The gap."],
+                  ["IV · Converge", "The strands find one line and drive to a point."],
+                  ["V · Ignition", "The point catches."],
+                  ["VI · System", "A world, then brand, site, socials, tools as one."],
+                ].map(([k, v]) => (
+                  <div key={k}>
+                    <span className="kl-eyebrow">{k}</span>
+                    <p className="kl-body-sm mt-3">{v}</p>
+                  </div>
+                ))}
               </div>
             </Reveal>
             <Reveal delay={0.05}>
-              <div className="relative w-full aspect-[4/3] md:aspect-[21/9] rounded-2xl overflow-hidden border border-[rgba(244,241,233,0.10)] bg-ink">
-                <SystemDiagram />
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-8">
-                <p className="kl-body">Brand feeds the site and the socials. Both feed the internal tools. The tools feed invoicing, and invoicing feeds the brand again. One loop, one supplier.</p>
-                <div><span className="kl-eyebrow">Suggested placement</span><p className="kl-body-sm mt-3">Directly under the Signal statement on home, replacing the plain paragraph.</p></div>
-                <div><span className="kl-eyebrow">Under the hood</span><p className="kl-mono text-[11px] leading-6 text-ash mt-3">Inline SVG · CSS dash-offset flow · zero JS · ~3 KB</p></div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-10 pt-10 border-t border-[rgba(244,241,233,0.07)]">
+                <p className="kl-body">
+                  It is the Signal sentence as a picture. Losing momentum is something you watch happen, and closing the
+                  gap is something you watch resolve.
+                </p>
+                <div>
+                  <span className="kl-eyebrow">Suggested placement</span>
+                  <p className="kl-body-sm mt-3">Behind the Signal section on home, with the sentence held over it.</p>
+                </div>
+                <div>
+                  <span className="kl-eyebrow">Under the hood</span>
+                  <p className="kl-mono text-[11px] leading-6 text-ash mt-3">
+                    R3F · 30 strands x 420 segments in one draw call · the filament&apos;s entire shape, coiling and turbulence
+                    computed in the vertex shader from two attributes, so the snarl writhes for free · GLSL simplex noise ·
+                    additive veil with a burning draw edge · labels via drei Html so they stay real type
+                  </p>
+                </div>
               </div>
             </Reveal>
           </div>
         </section>
+
 
         <section className="py-16 md:py-20 border-t border-[rgba(244,241,233,0.07)]">
           <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">

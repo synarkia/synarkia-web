@@ -107,6 +107,27 @@ body {
   letter-spacing: -0.005em;
 }
 
+/* The Signal statement: the one sentence that carries the argument.
+   Heavier and larger than any other body heading, and paired with a sans
+   support line so the two halves read as claim and answer. */
+.kl-statement {
+  font-family: var(--font-cormorant);
+  font-weight: 500;
+  font-size: clamp(2.3rem, 5.2vw, 4.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+  color: var(--color-light);
+}
+
+.kl-statement-sub {
+  font-family: var(--font-grotesk);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.65;
+  letter-spacing: 0.005em;
+  color: var(--color-ash);
+}
+
 .kl-h3 {
   font-family: var(--font-cormorant);
   font-weight: 400;

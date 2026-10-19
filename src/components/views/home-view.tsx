@@ -1,19 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, LayoutDashboard, Code2, Sparkles, Zap, Rocket, Compass, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, LayoutDashboard, Code2, Zap, Rocket, Megaphone, Compass, Check } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Contact } from "@/components/sections/contact";
+import { SignalWords } from "@/components/sections/signal-words";
 import { WorkGallery } from "@/components/sections/work-gallery";
 import { Reveal } from "@/components/ui/reveal";
 import { CursorLight } from "@/components/ui/cursor-light";
-import InstrumentMount from "@/components/3d/instrument-mount";
+import PlanetaryHeroMount from "@/components/3d/planetary-hero-mount";
+import MomentumMount from "@/components/3d/momentum-mount";
+import MethodMount from "@/components/3d/method-mount";
 import { useLang } from "@/i18n/language-provider";
-import { BOOKING_URL } from "@/lib/links";
+import { BOOKING_URL, FOUNDER_SITE } from "@/lib/links";
 import { track } from "@vercel/analytics";
 
-const serviceIcons = [LayoutDashboard, Zap, Code2, Sparkles, Rocket, Compass];
+const serviceIcons = [LayoutDashboard, Zap, Code2, Rocket, Megaphone, Compass];
 
 export function HomeView() {
   const { t } = useLang();
@@ -24,54 +27,65 @@ export function HomeView() {
       <CursorLight />
       <Navbar />
       <main id="top" className="min-h-screen bg-ink">
-        {/* ════════ HERO ════════ */}
-        <section className="relative w-full h-[100svh] min-h-[680px] overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <InstrumentMount variant="core" />
-          </div>
-
-          <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(6,6,8,0.55)_100%)]" />
-          <div className="absolute bottom-0 left-0 right-0 h-56 z-[2] pointer-events-none bg-gradient-to-t from-ink to-transparent" />
-
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-5 pointer-events-none">
-            <div className="animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
-              <span className="kl-eyebrow">{h.hero.eyebrow}</span>
-            </div>
-            <h1 className="kl-display mt-7 mb-8 max-w-5xl kl-text-glow animate-fade-in" style={{ animationDelay: "0.35s", opacity: 0 }}>
-              Syndao
-            </h1>
-            <p
-              className="font-serif text-light text-[1.5rem] sm:text-[1.9rem] md:text-[2.15rem] leading-[1.32] max-w-3xl mb-11 animate-fade-in"
-              style={{ animationDelay: "0.55s", opacity: 0 }}
-            >
-              {h.hero.lead}
-            </p>
-            <div className="pointer-events-auto flex flex-col sm:flex-row items-center gap-4 animate-fade-in" style={{ animationDelay: "0.75s", opacity: 0 }}>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "home_hero" })} className="kl-cta-solid">
-                {h.hero.cta1} <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link href="#services" className="kl-cta">
-                {h.hero.cta2}
-              </Link>
+        {/* ════════ HERO + SIGNAL share one travelling backdrop ════════ */}
+        <div className="relative">
+          {/* pinned while either section is on screen, so the globe slides with the page */}
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
+              <PlanetaryHeroMount />
+              {/* keep the wordmark and eyebrow legible over the globe without flattening it */}
+              <div className="absolute inset-x-0 top-0 h-64 pointer-events-none bg-gradient-to-b from-ink via-ink/70 to-transparent" />
+              <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(6,6,8,0.5)_0%,rgba(6,6,8,0.26)_40%,transparent_66%)]" />
+              <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(6,6,8,0.6)_100%)]" />
+              <div className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none bg-gradient-to-t from-ink to-transparent" />
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 pointer-events-none">
-            <span className="kl-eyebrow text-[10px]">{h.hero.scroll}</span>
-            <span className="w-px h-10 bg-gradient-to-b from-[rgba(244,241,233,0.4)] to-transparent kl-breathe" />
-          </div>
-        </section>
+          <section className="relative z-10 w-full h-[100svh] min-h-[680px]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pointer-events-none">
+              <div className="animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
+                <span className="kl-eyebrow">{h.hero.eyebrow}</span>
+              </div>
+              <h1 className="kl-display mt-7 mb-8 max-w-5xl kl-text-glow animate-fade-in" style={{ animationDelay: "0.35s", opacity: 0 }}>
+                Syndao
+              </h1>
+              <p
+                className="font-serif text-light text-[1.5rem] sm:text-[1.9rem] md:text-[2.15rem] leading-[1.32] max-w-3xl mb-11 animate-fade-in"
+                style={{ animationDelay: "0.55s", opacity: 0 }}
+              >
+                {h.hero.lead}
+              </p>
+              <div className="pointer-events-auto flex flex-col sm:flex-row items-center gap-5 sm:gap-7 animate-fade-in" style={{ animationDelay: "0.75s", opacity: 0 }}>
+                <a href="#audit" onClick={() => track("cta_audit", { where: "home_hero" })} className="kl-cta-solid">
+                  {h.hero.cta1} <ArrowRight className="w-4 h-4" />
+                </a>
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_book", { where: "home_hero" })} className="kl-link">
+                  {h.hero.cta2}
+                </a>
+              </div>
+            </div>
 
-        {/* ════════ SIGNAL ════════ */}
-        <section className="py-28 md:py-36">
-          <div className="mx-auto w-full max-w-[860px] px-5 sm:px-8 text-center">
-            <Reveal>
-              <span className="kl-eyebrow">{h.signal.eyebrow}</span>
-              <p className="kl-h2 mt-8 mb-8">{h.signal.h}</p>
-              <p className="kl-body max-w-xl mx-auto">{h.signal.body}</p>
-            </Reveal>
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none">
+              <span className="kl-eyebrow text-[10px]">{h.hero.scroll}</span>
+              <span className="w-px h-10 bg-gradient-to-b from-[rgba(244,241,233,0.4)] to-transparent kl-breathe" />
+            </div>
+          </section>
+
+          {/* the globe keeps developing for a beat after the hero copy leaves */}
+          <div className="relative z-10 h-[80vh]" />
+
+          {/* ════════ THE SIGNAL — the sentence, one word at a time,
+               read over the globe which is still there, still moving ════════ */}
+          <div className="relative z-10">
+            <SignalWords />
           </div>
-        </section>
+
+          {/* the globe hands over here */}
+          <div className="relative z-10 h-[45vh]" />
+        </div>
+
+        {/* ════════ THE SECOND ANIMATION — all the space it needs ════════ */}
+        <MomentumMount />
 
         {/* ════════ SERVICES ════════ */}
         <section id="services" className="py-24 md:py-32 border-t border-[rgba(244,241,233,0.07)]">
@@ -86,7 +100,7 @@ export function HomeView() {
               {h.services.items.map((s, i) => {
                 const Icon = serviceIcons[i] ?? Compass;
                 return (
-                  <Reveal key={s.title} delay={(i % 3) * 0.08}>
+                  <Reveal key={s.title} delay={i * 0.13}>
                     <div className="kl-card p-8 h-full flex flex-col group">
                       <span className="flex items-center justify-center w-12 h-12 rounded-xl border border-[rgba(244,241,233,0.10)] mb-7 group-hover:border-[rgba(244,241,233,0.28)] transition-colors">
                         <Icon className="w-5 h-5 text-light" strokeWidth={1.3} />
@@ -154,8 +168,12 @@ export function HomeView() {
               <h2 className="kl-h1 mt-6">{h.method.h}</h2>
             </Reveal>
 
+            {/* the four steps as forms: one plot of land, four moments,
+                standing directly above the column each one belongs to */}
+            <MethodMount />
+
             {/* four-step process, purpose-built for exactly four */}
-            <div className="relative">
+            <div className="relative mt-4 md:mt-8">
               {/* connecting line through the nodes (desktop) */}
               <div className="hidden lg:block absolute top-[23px] left-[7%] right-[7%] h-px bg-[linear-gradient(90deg,transparent,#3A3A3F_18%,#3A3A3F_82%,transparent)]" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
@@ -182,12 +200,41 @@ export function HomeView() {
         {/* ════════ WHO ════════ */}
         <section className="py-24 md:py-32 border-t border-[rgba(244,241,233,0.07)] relative overflow-hidden">
           <div className="pointer-events-none absolute top-1/2 right-0 translate-x-1/3 -translate-y-1/2 w-[600px] h-[400px] kl-glow opacity-25" />
-          <div className="mx-auto w-full max-w-[860px] px-5 sm:px-8 relative z-10">
-            <Reveal>
-              <span className="kl-eyebrow">{h.who.eyebrow}</span>
-              <h2 className="kl-h2 mt-7 mb-7 max-w-2xl">{h.who.h}</h2>
-              <p className="kl-body max-w-xl">{h.who.body}</p>
-            </Reveal>
+          <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <Reveal>
+                <span className="kl-eyebrow">{h.who.eyebrow}</span>
+                <h2 className="kl-h2 mt-7 max-w-2xl">{h.who.h}</h2>
+              </Reveal>
+              <Reveal delay={0.1}>
+                {/* The whole preview is the link. The frame itself takes no
+                    pointer events, so a click reaches the anchor instead of
+                    landing inside the embedded page, and a touch drag scrolls
+                    this page rather than being swallowed by the frame. */}
+                <a
+                  href={FOUNDER_SITE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="kl-card group block p-2 md:p-3 overflow-hidden"
+                >
+                  <span className="relative block w-full aspect-[4/3] rounded-xl overflow-hidden border border-[rgba(244,241,233,0.08)] group-hover:border-[rgba(244,241,233,0.22)] transition-colors bg-[linear-gradient(160deg,#131317,#0b0b0e)]">
+                    <iframe
+                      src={FOUNDER_SITE}
+                      title="Leï Zagato"
+                      loading="lazy"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      style={{ border: 0 }}
+                    />
+                  </span>
+                  <span className="flex items-center justify-between gap-3 px-2 pt-4 pb-1">
+                    <span className="kl-link">{FOUNDER_SITE.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span>
+                    <ArrowUpRight className="w-4 h-4 text-ash group-hover:text-light transition-colors" />
+                  </span>
+                </a>
+              </Reveal>
+            </div>
           </div>
         </section>
 
