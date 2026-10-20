@@ -104,8 +104,15 @@ const LAND_VERT = `
     float tw = step(0.93, aSeed) * (0.5 + 0.5 * sin(uTime * 0.5 + aSeed * 51.0));
 
     vAlpha = (uOpacity * m * coastW + hot * 0.6 + tw * 0.16 * m) * face;
-    // never let a point fall under a pixel: sub-pixel points shimmer as the globe turns
-    gl_PointSize = max(1.6, (uSize * (sizeW + hot * 1.5 + tw * 0.3)) * uScale / max(0.001, -mv.z));
+    // A soft sprite under ~2 device px covers a different share of each pixel
+    // as the globe drifts, so it twinkles; and clamping it up to a floor at full
+    // strength made the small, distant globe brighter and sparklier still. Draw
+    // small points at a steady 2.4 px and dim them by how much they were
+    // enlarged, so each point puts out the same light it would have at its true size.
+    float natural = (uSize * (sizeW + hot * 1.5 + tw * 0.3)) * uScale / max(0.001, -mv.z);
+    float sz = max(2.4, natural);
+    vAlpha *= clamp(natural / sz, 0.3, 1.0);
+    gl_PointSize = sz;
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -128,7 +135,11 @@ const FADE_VERT = `
   void main() {
     vec4 mv = modelViewMatrix * vec4(position, 1.0);
     vF = depthFade(mv, uR);
-    gl_PointSize = max(1.35, uSize * uScale / max(0.001, -mv.z));
+    // same constant-light floor as the land points (see LAND_VERT)
+    float natural = uSize * uScale / max(0.001, -mv.z);
+    float sz = max(2.4, natural);
+    vF *= clamp(natural / sz, 0.3, 1.0);
+    gl_PointSize = sz;
     gl_Position = projectionMatrix * mv;
   }
 `;
@@ -137,8 +148,10 @@ const FADE_POINT_FRAG = `
   varying float vF;
   void main() {
     vec2 d = gl_PointCoord - 0.5;
-    if (length(d) > 0.5) discard;
-    gl_FragColor = vec4(uColor, uOpacity * vF);
+    float r = length(d);
+    if (r > 0.5) discard;
+    // a soft edge: hard-edged discs of a pixel or two alias as they turn
+    gl_FragColor = vec4(uColor, uOpacity * vF * smoothstep(0.5, 0.2, r));
   }
 `;
 const FADE_LINE_VERT = `
@@ -423,6 +436,7 @@ function Scene({
   );
   const markerRefs = useRef<(THREE.Mesh | null)[]>([]);
   const flash = useRef<number[]>(new Array(markers.length).fill(0));
+  const glow = useRef<number[]>([]);
   const prevU = useRef<number[]>([]);
   const packetRefs = useRef<(THREE.Mesh | null)[]>([]);
   const trailRefs = useRef<(THREE.Points<THREE.BufferGeometry<THREE.NormalOrGLBufferAttributes>> | null)[]>([]);
@@ -609,21 +623,31 @@ function Scene({
       }
       const raw = (t * pkt.speed + pkt.phase) % 1.3;
       const uc = clamp01(raw);
-      if (uc < (prevU.current[idx] ?? 0)) flash.current[pkt.ri + 1] = 1; // arrival
-      prevU.current[idx] = uc;
+      // The city lights when the packet actually lands (raw crosses 1), not when
+      // the cycle wraps and it relaunches from the origin: that blink came a beat
+      // after the packet had gone, and read as random flicker.
+      const prev = prevU.current[idx] ?? raw;
+      if (prev <= 1 && raw > 1) flash.current[pkt.ri + 1] = 1;
+      prevU.current[idx] = raw;
 
-      const live = raw <= 1.001;
-      mesh.visible = live;
-      if (live) {
+      // Nothing pops. The head grows in as it leaves and shrinks into the city
+      // as it lands; the trail keeps travelling after it and drains in behind it,
+      // so it is fully gathered at the destination before it is hidden.
+      const TAIL = 11 * 0.011;
+      const drained = raw > 1 + TAIL;
+      const head = ramp(raw, 0, 0.04) * (1 - ramp(raw, 0.97, 1));
+      mesh.visible = head > 0.001;
+      if (mesh.visible) {
         pkt.rt.at(pkt.fil, uc, tmp);
         mesh.position.copy(tmp);
+        mesh.scale.setScalar(head);
       }
       if (trail) {
-        trail.visible = live;
-        if (live) {
+        trail.visible = !drained;
+        if (!drained) {
           const arr = trail.geometry.getAttribute("position") as THREE.BufferAttribute;
           for (let k = 0; k < 12; k++) {
-            pkt.rt.at(pkt.fil, clamp01(uc - k * 0.011), tmp);
+            pkt.rt.at(pkt.fil, clamp01(raw - k * 0.011), tmp);
             arr.setXYZ(k, tmp.x, tmp.y, tmp.z);
           }
           arr.needsUpdate = true;
@@ -636,10 +660,13 @@ function Scene({
     mats.marker.opacity = markerIn;
     mats.hub.opacity = markerIn * (0.45 + Math.sin(t * 1.1) * 0.18 * idle);
     markers.forEach((_, i) => {
-      flash.current[i] = Math.max(0, flash.current[i] - delta * 1.6);
+      // the flash is a target; the glow follows it with a quick but soft rise,
+      // so a landing swells the city instead of snapping it to 2.7x in one frame
+      flash.current[i] = Math.max(0, flash.current[i] - dt * 1.6);
+      glow.current[i] = (glow.current[i] ?? 0) + (flash.current[i] - (glow.current[i] ?? 0)) * (1 - Math.exp(-dt / 0.08));
       const m = markerRefs.current[i];
       if (m) {
-        const s = (i === 0 ? 1.25 : 1) * (1 + flash.current[i] * 1.7) * markerIn;
+        const s = (i === 0 ? 1.25 : 1) * (1 + glow.current[i] * 1.7) * markerIn;
         m.scale.setScalar(Math.max(0.001, s));
         m.visible = markerIn > 0.01;
       }
@@ -856,11 +883,13 @@ export function PlanetaryHero({ dim, lookY = 0.95 }: { dim?: number; lookY?: num
   const FLOOR = 0.1; // first paint already has the lattice, never an empty frame
   const AMBIENT_MS = 19000; // untouched at the top, the world still builds itself
 
-  // the globe competes with the type on a phone, so it sits back a little there
-  const [auto, setAuto] = useState(1);
-  useEffect(() => {
-    setAuto(window.innerWidth < 768 ? 0.72 : 1);
-  }, []);
+  // the globe competes with the type on a phone, so it sits back a little there.
+  // Decided before the first frame (this only ever renders on the client), so
+  // a phone never sees one bright frame before it dims.
+  const [auto] = useState(() => (typeof window !== "undefined" && window.innerWidth < 768 ? 0.72 : 1));
+  // once it has handed over it is invisible: stop drawing it, so it never
+  // competes with the scene that follows for the GPU
+  const [live, setLive] = useState(true);
 
   /**
    * The globe finishes its journey inside the hero and then stays.
@@ -878,6 +907,8 @@ export function PlanetaryHero({ dim, lookY = 0.95 }: { dim?: number; lookY?: num
         const handover = 1 - clamp01((y - 3.95) / 0.6); // only now does it give way
         const f = settle * handover;
         el.style.opacity = String(f * f * (3 - 2 * f));
+        const shouldRun = f > 0.001;
+        setLive((prev) => (prev === shouldRun ? prev : shouldRun));
       }
       raf = requestAnimationFrame(tick);
     };
@@ -897,16 +928,23 @@ export function PlanetaryHero({ dim, lookY = 0.95 }: { dim?: number; lookY?: num
     // at the very top, with no scroll yet, it still builds itself
     const ambient = reduced ? 1 : clamp01((performance.now() - started.current) / AMBIENT_MS);
     const idle = FLOOR + ambient * ambient * (3 - 2 * ambient) * 0.5;
-    // once the page moves, scroll owns it completely, and reverses it exactly
+    // Scroll carries it on from wherever the self-build has reached, never
+    // back from it. (Taking the larger of a fading idle term and the raw scroll
+    // rewound it from 0.6 to 0.14 in the first sixth of a screen: the lattice
+    // snapped back in and the land unformed, which read as a flicker.)
+    // Still a pure function of scroll at any moment, so it reverses exactly.
     const scrolled = clamp01(window.scrollY / Math.max(1, window.innerHeight * 1.1));
-    return Math.max(idle * (1 - clamp01(scrolled * 6)), scrolled);
+    return idle + (1 - idle) * scrolled;
   };
 
   return (
     <div ref={shell} className="w-full h-full">
       <Canvas
         className="w-full h-full"
-        camera={{ position: [0, 1.1, 14.6], fov: 40 }}
+        frameloop={live ? "always" : "never"}
+        // the camera draws back to ~60 units: an explicit range keeps depth
+        // precision for the lattice and land, where the default 0.1/2000 lets lines z-fight
+        camera={{ position: [0, 1.1, 14.6], fov: 40, near: 1, far: 200 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
@@ -921,7 +959,7 @@ export function PlanetaryHero({ dim, lookY = 0.95 }: { dim?: number; lookY?: num
             drift={0.012}
             getOutro={getOutro}
           />
-          <EffectComposer>
+          <EffectComposer multisampling={4}>
             <Bloom intensity={0.5} luminanceThreshold={0.55} luminanceSmoothing={0.85} mipmapBlur radius={0.68} />
           </EffectComposer>
         </Suspense>

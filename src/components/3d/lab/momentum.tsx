@@ -1694,10 +1694,34 @@ export default function Momentum({
   useEffect(() => {
     const el = host.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setMounted((m) => m || e.isIntersecting), { rootMargin: "1800px 0px" });
+    // Creating the canvas compiles every shader in one main-thread task (~65 ms
+    // measured). At 1800px early that landed while the globe was at full
+    // strength and froze it for a few frames. 200px early puts it in the globe's
+    // handover, with a screen of scroll still to go before the film fades up.
+    const io = new IntersectionObserver(([e]) => setMounted((m) => m || e.isIntersecting), { rootMargin: "200px 0px" });
     io.observe(el);
     return () => io.disconnect();
   }, []);
+
+  // Mounted early so its code and shaders are ready, but only drawn once it is
+  // close. Left running, it rendered the whole film (bloom included) at zero
+  // opacity behind the globe, and the two scenes fought for the GPU: the globe
+  // stuttered. A short warm-up after mounting compiles everything first.
+  const [near, setNear] = useState(false);
+  // true until shortly after mounting (nothing is drawn before mount anyway)
+  const [warming, setWarming] = useState(true);
+  useEffect(() => {
+    const el = host.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setNear(e.isIntersecting), { rootMargin: "600px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!mounted) return;
+    const id = window.setTimeout(() => setWarming(false), 1200);
+    return () => window.clearTimeout(id);
+  }, [mounted]);
 
   // the opening beat is held for a breath so the scene can fade up before anything happens
   const HOLD = 0.012;
@@ -1817,6 +1841,7 @@ export default function Momentum({
           {mounted && (
             <Canvas
               className="w-full h-full"
+              frameloop={near || warming ? "always" : "never"}
               // near/far matter here: the camera ends up 45+ units out, and the
               // kingdom stacks many shapes on one ground plane. With the default
               // 0.1/2000 range there is almost no depth precision left at that

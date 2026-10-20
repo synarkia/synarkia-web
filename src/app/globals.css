@@ -299,7 +299,10 @@ body {
   background: radial-gradient(circle, rgba(244, 241, 233, 0.06), transparent 60%);
   pointer-events: none;
   z-index: 30;
-  mix-blend-mode: screen;
+  /* no mix-blend-mode: a blended layer moving over a WebGL canvas that redraws
+     every frame forces the browser to re-blend the whole region each frame, and
+     on desktop that showed up as flicker on the globe. At 6% light over ink,
+     normal blending looks the same. */
   will-change: transform;
 }
 @media (hover: none) { .kl-cursor-light { display: none; } }

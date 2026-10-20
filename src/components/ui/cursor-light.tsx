@@ -15,16 +15,18 @@ export function CursorLight() {
     let cx = x;
     let cy = y;
 
-    const onMove = (e: MouseEvent) => {
-      x = e.clientX;
-      y = e.clientY;
-    };
-
+    // runs only while the light is catching up with the pointer, then rests
     const loop = () => {
       cx += (x - cx) * 0.12;
       cy += (y - cy) * 0.12;
       el.style.transform = `translate(${cx}px, ${cy}px)`;
-      raf = requestAnimationFrame(loop);
+      raf = Math.abs(x - cx) + Math.abs(y - cy) > 0.5 ? requestAnimationFrame(loop) : 0;
+    };
+
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!raf) raf = requestAnimationFrame(loop);
     };
 
     window.addEventListener("mousemove", onMove);
